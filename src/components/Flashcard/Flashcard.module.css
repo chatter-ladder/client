@@ -1,0 +1,8 @@
+.Flashcard {
+  height: 250px;
+  max-width: 400px;
+  background-color: brown;
+  text-align: center;
+  color: white;
+  font-size: 200%
+}
