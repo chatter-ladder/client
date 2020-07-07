@@ -13,7 +13,7 @@ class Flashcard extends Component {
     }));
   };
 
-  containerClasses = () => {
+  flashcardClasses = () => {
     if (this.state.flipped) {
       return `${classes.Flashcard} ${classes.Flipped}`
     }
@@ -23,12 +23,16 @@ class Flashcard extends Component {
   render() {
     return(
       <div className={classes.Container}>
-        <div className={this.containerClasses()} onClick={this.flipHandler}>
+        <div className={this.flashcardClasses()} onClick={this.flipHandler}>
           <div className={`${classes.Pattern} ${classes.Front}`}>
-            <h4>Front</h4>
+            <div className={classes.Content}>
+              <h4>Front</h4>
+            </div>
           </div>
           <div className={`${classes.Pattern} ${classes.Back}`}>
-            <h4>Back</h4>
+            <div className={classes.Content}>
+              <h4>Back</h4>
+            </div>
           </div>
         </div>
       </div>
