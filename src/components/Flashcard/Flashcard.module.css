@@ -1,7 +1,8 @@
 .Container {
   background-color: transparent;
-  width: 300px;
-  height: 170px;
+  width: 400px;
+  height: 250px;
+  /* padding-top: 40px; */
   /* border: 1px solid #f1f1f1; */
   perspective: 1000px;
 }
@@ -22,7 +23,7 @@
 .Flashcard::before {
   content: '';
   position: absolute;
-  top: 0;
+  /* top: 0; */
   left: 40px;
   width: 2px;
   height: 100%;
@@ -35,15 +36,15 @@
 }
 
 .Pattern {
-  top: 20px;
-  height: 100%;
+  top: 30px;
+  height: 220px;
   background-image: repeating-linear-gradient(white 0px, white 24px, teal 25px);
 }
 
 .Front, .Back {
   position: absolute;
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
   backface-visibility: hidden;
 }
 
@@ -60,8 +61,8 @@
   padding-top: 6px;
   padding-left: 56px;
   padding-right: 16px;
-  line-height: 25px;
-  font-size: 19px;
+  line-height: 50px;
+  font-size: 38px;
   letter-spacing: 1px;
   word-spacing: 5px;
 }
