@@ -4,7 +4,11 @@ import classes from './Flashcard.module.css';
 const Flashcard = () => {
   return(
     <div className={classes.Flashcard}>
-      <h4>hola</h4>
+      <div className={classes.Pattern}>
+        <div className={classes.Content}>
+          <h4>hola</h4>
+        </div>
+      </div>
     </div>
   );
 }
