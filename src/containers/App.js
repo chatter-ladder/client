@@ -4,6 +4,7 @@ import { Route } from 'react-router-dom';
 import Navigation from '../components/Navigation/Navigation';
 import Home from './pages/Home/Home';
 import Profile from './pages/Profile/Profile';
+import Flashcards from './pages/Flashcards/Flashcards';
 import Flashcard from '../components/Flashcard/Flashcard';
 
 
@@ -16,6 +17,7 @@ class App extends Component {
         <Navigation />
         <Route path='/' exact component={Home} />
         <Route path='/profile' component={Profile} />
+        <Route path='/flashcards' component={Flashcards} />
         <Flashcard />
       </>
     );
