@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom';
 
 import Navigation from '../components/Navigation/Navigation';
 import Home from './pages/Home/Home';
+import Profile from './pages/Profile/Profile';
 import Flashcard from '../components/Flashcard/Flashcard';
 
 
@@ -13,7 +14,8 @@ class App extends Component {
     return (
       <>
         <Navigation />
-        <Route path='/' component={Home} />
+        <Route path='/' exact component={Home} />
+        <Route path='/profile' component={Profile} />
         <Flashcard />
       </>
     );
