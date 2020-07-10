@@ -5,7 +5,7 @@ import classes from './Navigation.module.css';
 
 const Navigation = () => {
   return (
-    <nav>
+    <nav className={classes.Navigation}>
       <ul>
         <li><NavLink activeClassName={classes.active} to='/'>HOME</NavLink></li>
         <li><NavLink activeClassName={classes.active} to='profile'>PROFILE</NavLink></li>
