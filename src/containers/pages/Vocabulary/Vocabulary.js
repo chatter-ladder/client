@@ -1,27 +1,52 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-const Vocabulary = () => {
-  return (
+import Table from '../../../components/UI/Table/Table';
+
+class Vocabulary extends Component {
+  render () {
+
+    const headings = [
+      'Spanish Word',
+      'Translation',
+      'Groups',
+      'Learning Status'
+    ];
+
+    const rows = [
+      [
+        'hola',
+        'hello',
+        '',
+        'new'
+      ],
+      [
+        'hacinda',
+        'villa',
+        '',
+        'new'
+      ],
+      [
+        'amigo',
+        'friend',
+        '',
+        'new'
+      ]
+    ]
+
+    return (
       <>
-      <h1>Vocabulary List</h1>
-      <form>
-        <input type='text' name='word' placeholder="Enter new word" />
-        <input type='text' name='translation' placeholder="Enter translation" />
-        <button>Submit</button>
-      </form>
+        <h1>Vocabulary List</h1>
+        <form>
+          <input type='text' name='word' placeholder="Enter new word" />
+          <input type='text' name='translation' placeholder="Enter translation" />
+          <button>Submit</button>
+        </form>
 
-      <table>
-        <tbody>
-          <tr>
-            <th>Word</th>
-            <th>Translation</th>
-            <th>Group</th>
-            <th>Learning Status</th>
-          </tr>
-        </tbody>
-      </table>
+        <Table headings={headings} rows={rows} />
+
       </>
-  )
-}
+    );
+  };
+};
 
 export default Vocabulary;
