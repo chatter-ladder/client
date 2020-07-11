@@ -1,6 +1,8 @@
 import React from 'react';
 
-const Cell = () => {
+import classes from './Cell.module.css';
+
+const Cell = (props) => {
   return (
     props.header
     ? (
@@ -11,7 +13,7 @@ const Cell = () => {
       <th className={classes.Content}>
         {props.content}
       </th>
-    );
+    )
   );
 }
 
