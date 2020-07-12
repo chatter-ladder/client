@@ -14,10 +14,10 @@ class Table extends Component {
     )
   }
 
-  renderRow = () => {
+  renderBodyRow = (content) => {
     return (
       <Cell
-        content='hello'
+        content={content}
         header={false}
       />
     )
@@ -29,10 +29,21 @@ class Table extends Component {
         {this.props.headings.map(heading => this.renderHeadingRow(heading))}
       </tr>
     )
+
+    const bodyRows = (
+      this.props.rows.map(row => {
+        return (
+          <tr>
+            {row.map(content => this.renderBodyRow(content))}
+          </tr>
+        )
+      })
+    );
+
     return (
-      <table>
+      <table className={classes.Table}>
         <thead>{headingRows}</thead>
-        <tbody></tbody>
+        <tbody>{bodyRows}</tbody>
       </table>
     );
   }
