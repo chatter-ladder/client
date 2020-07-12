@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import classes from './Table.module.css';
 import Cell from './Cell/Cell';
 
 class Table extends Component {
@@ -23,7 +24,17 @@ class Table extends Component {
   }
 
   render () {
-    return (<div>Table</div>);
+    const headingRows = (
+      <tr>
+        {this.props.headings.map(this.renderHeadingRow)}
+      </tr>
+    )
+    return (
+      <table>
+        <thead>{headingRows}</thead>
+        <tbody></tbody>
+      </table>
+    );
   }
 }
 

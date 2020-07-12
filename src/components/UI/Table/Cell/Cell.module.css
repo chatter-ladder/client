@@ -1,7 +1,11 @@
 .Header {
-
+  border: 1px solid #f4f6f8;
+  padding: 4px;
+  text-align: left;
 }
 
 .Content {
-  
+  border: 1px solid #f4f6f8;
+  padding: 4px;
+  text-align: left;
 }
