@@ -8,6 +8,7 @@ class Table extends Component {
   renderHeadingRow = (content) => {
     return (
       <Cell
+        key={content}
         content={content}
         header={true}
       />
@@ -41,10 +42,12 @@ class Table extends Component {
     );
 
     return (
-      <table className={classes.Table}>
-        <thead>{headingRows}</thead>
-        <tbody>{bodyRows}</tbody>
-      </table>
+      <div className={classes.Container}>
+        <table className={classes.Table}>
+          <thead>{headingRows}</thead>
+          <tbody>{bodyRows}</tbody>
+        </table>
+      </div>
     );
   }
 }

@@ -30,6 +30,30 @@ class Vocabulary extends Component {
         'friend',
         '',
         'new'
+      ],
+      [
+        'salud',
+        'Bless you (after someone sneezes',
+        '',
+        'new'
+      ],
+      [
+        'Buenas noches',
+        'Good evening',
+        '',
+        'new'
+      ],
+      [
+        'Permiso, con permiso (para pasar)',
+        'Excuse me please (used to pass someone)',
+        '',
+        'new'
+      ],
+      [
+        'el dolor de cabeza',
+        'headache',
+        '',
+        'new'
       ]
     ]
 
