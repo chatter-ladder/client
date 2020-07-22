@@ -43,10 +43,12 @@ class Table extends Component {
 
     return (
       <div className={classes.Container}>
-        <table className={classes.Table}>
-          <thead>{headingRows}</thead>
-          <tbody>{bodyRows}</tbody>
-        </table>
+        <div className={classes.ScrollContainer}>
+          <table className={classes.Table}>
+            <thead>{headingRows}</thead>
+            <tbody>{bodyRows}</tbody>
+          </table>
+        </div>
       </div>
     );
   }
