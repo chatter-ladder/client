@@ -1,12 +1,24 @@
 .Header {
   border: 1px solid #f4f6f8;
   padding: 4px;
-  text-align: left;
+  /* text-align: left;
+  margin-left: 250px; */
 }
 
 .Content {
   border: 1px solid #f4f6f8;
   padding: 4px;
   text-align: left;
-  min-width: 300px;
+}
+
+.FixedCell {
+  position: absolute;
+  top: auto;
+  left: 0;
+  min-width: 250px;
+}
+
+.Body {
+  min-width: 200px;
+  margin-left: 250px;
 }

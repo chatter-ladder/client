@@ -5,12 +5,13 @@ import Cell from './Cell/Cell';
 
 class Table extends Component {
 
-  renderHeadingRow = (content) => {
+  renderHeadingRow = (content, colIndex) => {
     return (
       <Cell
         key={content}
         content={content}
         header={true}
+        fixed={colIndex === 0}
       />
     )
   }
@@ -23,6 +24,7 @@ class Table extends Component {
         key={`${rowIndex}-${contentIndex}`}
         content={content}
         header={false}
+        fixed={contentIndex === 0}
       />
     )
   }
@@ -30,7 +32,7 @@ class Table extends Component {
   render () {
     const headingRows = (
       <tr>
-        {this.props.headings.map(heading => this.renderHeadingRow(heading))}
+        {this.props.headings.map((heading, colIndex) => this.renderHeadingRow(heading, colIndex))}
       </tr>
     )
 

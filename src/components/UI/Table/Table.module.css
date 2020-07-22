@@ -1,9 +1,11 @@
 .Container {
+  position: relative;
   max-width: 100vw;
 }
 
 .ScrollContainer {
   overflow-x: auto;
+  margin-left: 260px;
 }
 
 .Table {
