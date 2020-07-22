@@ -15,9 +15,12 @@ class Table extends Component {
     )
   }
 
-  renderBodyRow = (content) => {
+  renderBodyRow = (content, rowIndex, contentIndex) => {
+    // console.log(rowIndex)
+    // console.log(contentIndex)
     return (
       <Cell
+        key={`${rowIndex}-${contentIndex}`}
         content={content}
         header={false}
       />
@@ -32,10 +35,10 @@ class Table extends Component {
     )
 
     const bodyRows = (
-      this.props.rows.map(row => {
+      this.props.rows.map((row, rowIndex) => {
         return (
-          <tr>
-            {row.map(content => this.renderBodyRow(content))}
+          <tr key={rowIndex}>
+            {row.map((content, contentIndex) => this.renderBodyRow(content, rowIndex, contentIndex))}
           </tr>
         )
       })
