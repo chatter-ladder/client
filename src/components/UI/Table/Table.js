@@ -18,20 +18,21 @@ class Table extends Component {
   }
 
   renderHeadingRow = (content, colIndex) => {
+    // console.log(this.state.cellHeights)
     return (
       <Cell
         key={content}
         content={content}
         header={true}
         fixed={colIndex === 0}
-        // height={this.cellHeight[0]}
+        height={this.state.cellHeights[0]}
       />
     )
   }
 
   renderBodyRow = (row, rowIndex) => {
-    // console.log(rowIndex)
-    // console.log(contentIndex)
+    console.log(`rowIndex: ${rowIndex}`)
+    console.log(this.state.cellHeights[rowIndex + 1])
     return (
       <tr key={rowIndex}>
         {row.map((content, contentIndex) => {
@@ -41,6 +42,7 @@ class Table extends Component {
               content={content}
               header={false}
               fixed={contentIndex === 0}
+              height={this.state.cellHeights[rowIndex + 1]}
             />
           )
         })}
