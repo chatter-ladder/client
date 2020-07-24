@@ -17,11 +17,14 @@ const Cell = (props) => {
     } else {
       style.push(classes.Body)
     }
+
     return style.join(" ");
   }
  
+  const cellHeight = props.height ? { height: `${props.height}px`} : undefined;
+
   return (
-      <th className={cellStyle()}>
+      <th className={cellStyle()} style={cellHeight}>
         {props.content}
       </th>
   );
