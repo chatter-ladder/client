@@ -3,6 +3,44 @@ import React, { Component } from 'react';
 import Table from '../../../components/UI/Table/Table';
 
 class Vocabulary extends Component {
+
+  state = {
+    words: {
+      elementType: 'input',
+      elementConfig: {
+        type: 'text',
+        placeholder: 'New word'
+      },
+      value: '',
+      validation: {
+        valid: false,
+        required: true
+      }
+    },
+    translation: {
+      elementType: 'input',
+      elementConfig: {
+        type: 'text',
+        placeholder: 'Translation'
+      },
+      value: '',
+      validation: {
+        valid: false,
+        required: true
+      }
+    }
+  }
+
+  checkValidity(value, rules) {
+    let isValid = false;
+
+    if (rules.required) {
+      isValid = value.trim() !== '';
+    }
+
+    return isValid;
+  }
+
   render () {
 
     const headings = [
@@ -57,10 +95,16 @@ class Vocabulary extends Component {
       ]
     ]
 
+    addVocabHandler = ( event ) => {
+      event.preventDefault();
+      const vocabData = {}
+
+    }
+
     return (
       <>
         <h1>Vocabulary List</h1>
-        <form>
+        <form onSubmit={this.addVocabHandler}>
           <input type='text' name='word' placeholder="Enter new word" />
           <input type='text' name='translation' placeholder="Enter translation" />
           <button>Submit</button>
