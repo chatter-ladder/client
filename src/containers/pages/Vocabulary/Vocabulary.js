@@ -7,28 +7,30 @@ class Vocabulary extends Component {
   state = {
     users: [],
     vocab:[],
-    words: {
-      elementType: 'input',
-      elementConfig: {
-        type: 'text',
-        placeholder: 'New word'
+    vocabForm: {
+      word: {
+        elementType: 'input',
+        elementConfig: {
+          type: 'text',
+          placeholder: 'New word'
+        },
+        value: '',
+        validation: {
+          valid: false,
+          required: true
+        }
       },
-      value: '',
-      validation: {
-        valid: false,
-        required: true
-      }
-    },
-    translation: {
-      elementType: 'input',
-      elementConfig: {
-        type: 'text',
-        placeholder: 'Translation'
-      },
-      value: '',
-      validation: {
-        valid: false,
-        required: true
+      translation: {
+        elementType: 'input',
+        elementConfig: {
+          type: 'text',
+          placeholder: 'Translation'
+        },
+        value: '',
+        validation: {
+          valid: false,
+          required: true
+        }
       }
     }
   }
@@ -65,7 +67,6 @@ class Vocabulary extends Component {
 
   addVocabHandler = () => {
     // event.preventDefault();
-    console.log('adding word...')
     const vocabData = {
       user_id: 1,
       word: 'gata',
@@ -88,6 +89,20 @@ class Vocabulary extends Component {
     })
     .then(text => console.log(text))
 
+  }
+
+  inputChangedHandler = (event, inputIdentifier) => {
+    // console.log(event.target.value);
+    const updatedVocabForm = {
+      ...this.state.vocabForm
+    }
+
+    const updatedFormElement = {
+      ...updatedVocabForm[inputIdentifier]
+    }
+    updatedFormElement.value = event.target.value;
+    updatedVocabForm[inputIdentifier] = updatedFormElement;
+    this.setState({ vocabForm: updatedVocabForm })
   }
 
   render () {
@@ -148,8 +163,8 @@ class Vocabulary extends Component {
       <>
         <h1>Vocabulary List</h1>
         <form onSubmit={this.addVocabHandler}>
-          <input type='text' name='word' placeholder="Enter new word" />
-          <input type='text' name='translation' placeholder="Enter translation" />
+          <input type='text' onChange={(event) => this.inputChangedHandler(event, 'word')} value={this.state.vocabForm.word.value} name='word' placeholder="Enter new word" />
+          <input type='text' onChange={(event) => this.inputChangedHandler(event, 'translation')} value={this.state.vocabForm.translation.value} name='translation' placeholder="Enter translation" />
           <button>Submit</button>
         </form>
 
