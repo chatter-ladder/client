@@ -33,19 +33,20 @@ class Vocabulary extends Component {
   }
 
   componentDidMount() {
-    const data = { name: 'James', email: 'james@example.com'}
-    fetch('http://localhost:3001/users', {
-      method: 'POST',
-      headers: {'Content-Type':'application/json'},
-      body:JSON.stringify(data)
-    })
-    .then(response => {
-      if (response.ok) {
-        return(response.json())
-      }
-      throw new Error("Network response wasn't ok")
-    })
-    .then(data => console.log(`${data.name} has been added to db`))
+    // const data = { name: 'James', email: 'james@example.com'}
+    // fetch('http://localhost:3001/users', {
+    //   method: 'POST',
+    //   headers: {'Content-Type':'application/json'},
+    //   body:JSON.stringify(data)
+    // })
+    // .then(response => {
+    //   if (response.ok) {
+    //     return(response.json())
+    //   }
+    //   throw new Error("Network response wasn't ok")
+    // })
+    // .then(data => console.log(`${data.name} has been added to db`))
+   
     // fetch('http://localhost:3001/users')
     //   .then(response => {
     //     if (response.ok) {
@@ -72,6 +73,32 @@ class Vocabulary extends Component {
     }
 
     return isValid;
+  }
+
+  addVocabHandler = () => {
+    // event.preventDefault();
+    console.log('adding word...')
+    const vocabData = {
+      word: 'gata',
+      word_language: 'spanish',
+      translation: 'cat',
+      translation_language: 'english'
+    }
+
+    fetch('http://localhost:3001/vocabulary', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json', 'Accept': 'application/json'},
+      body:JSON.stringify(vocabData)
+    })
+    .then(response => {
+      console.log(response)
+      if (response.ok) {
+        return(response.text())
+      }
+      throw new Error("Network response wasn't ok")
+    })
+    .then(text => console.log(text))
+
   }
 
   render () {
@@ -128,12 +155,6 @@ class Vocabulary extends Component {
       ]
     ]
 
-    // addVocabHandler = ( event ) => {
-    //   event.preventDefault();
-    //   const vocabData = {}
-
-    // }
-
     return (
       <>
         <h1>Vocabulary List</h1>
@@ -142,6 +163,8 @@ class Vocabulary extends Component {
           <input type='text' name='translation' placeholder="Enter translation" />
           <button>Submit</button>
         </form>
+
+        <button onClick={this.addVocabHandler}>Add Word</button>
 
         <Table headings={headings} rows={rows} />
 
