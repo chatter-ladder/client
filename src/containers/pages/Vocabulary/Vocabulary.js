@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import Table from '../../../components/UI/Table/Table';
+import './Vocabulary.css'
 
 class Vocabulary extends Component {
 
@@ -176,12 +177,22 @@ class Vocabulary extends Component {
     //   ]
     // ]
 
+    let inputClassesWord = ['inputElement']
+    if (!this.state.vocabForm.word.validation.valid) {
+      inputClassesWord.push('invalid')
+    }
+
+    let inputClassesTranslation = ['inputElement']
+    if (!this.state.vocabForm.translation.validation.valid) {
+      inputClassesTranslation.push('invalid')
+    }
+
     return (
       <>
         <h1>Vocabulary List</h1>
         <form onSubmit={this.addVocabHandler}>
-          <input type='text' onChange={(event) => this.inputChangedHandler(event, 'word')} value={this.state.vocabForm.word.value} name='word' placeholder="Enter new word" />
-          <input type='text' onChange={(event) => this.inputChangedHandler(event, 'translation')} value={this.state.vocabForm.translation.value} name='translation' placeholder="Enter translation" />
+          <input className={inputClassesWord.join(' ')} type='text' onChange={(event) => this.inputChangedHandler(event, 'word')} value={this.state.vocabForm.word.value} name='word' placeholder="Enter new word" />
+          <input className={inputClassesTranslation.join(' ')} type='text' onChange={(event) => this.inputChangedHandler(event, 'translation')} value={this.state.vocabForm.translation.value} name='translation' placeholder="Enter translation" />
           <button>Submit</button>
         </form>
 
