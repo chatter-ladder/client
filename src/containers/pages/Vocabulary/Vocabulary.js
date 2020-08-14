@@ -17,7 +17,10 @@ class Vocabulary extends Component {
         value: '',
         validation: {
           valid: false,
-          required: true
+          required: true,
+          unique: true,
+          minLength: 1,
+          maxLength: 20
         }
       },
       translation: {
@@ -29,7 +32,9 @@ class Vocabulary extends Component {
         value: '',
         validation: {
           valid: false,
-          required: true
+          required: true,
+          minLength: 1,
+          maxLength: 20
         }
       }
     }
@@ -67,6 +72,9 @@ class Vocabulary extends Component {
 
   addVocabHandler = (event) => {
     event.preventDefault();
+
+    // need to check if word is unique in users vocab list before submitting
+    
     const vocabData = {
       user_id: 1,
       word: this.state.vocabForm.word.value,
@@ -100,8 +108,17 @@ class Vocabulary extends Component {
     const updatedFormElement = {
       ...updatedVocabForm[inputIdentifier]
     }
+
+    const updatedFormValidity = {
+      ...updatedFormElement['validation']
+    }
+
     updatedFormElement.value = event.target.value;
+    updatedFormValidity.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation)
+    
+    updatedFormElement['validation'] = updatedFormValidity
     updatedVocabForm[inputIdentifier] = updatedFormElement;
+    
     this.setState({ vocabForm: updatedVocabForm })
   }
 
