@@ -22,7 +22,8 @@ class Vocabulary extends Component {
           unique: true,
           minLength: 1,
           maxLength: 20
-        }
+        },
+        touched: false
       },
       translation: {
         elementType: 'input',
@@ -36,7 +37,8 @@ class Vocabulary extends Component {
           required: true,
           minLength: 1,
           maxLength: 20
-        }
+        },
+        touched: false
       }
     }
   }
@@ -115,6 +117,7 @@ class Vocabulary extends Component {
     }
 
     updatedFormElement.value = event.target.value;
+    updatedFormElement.touched = true;
     updatedFormValidity.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation)
     
     updatedFormElement['validation'] = updatedFormValidity
@@ -178,12 +181,12 @@ class Vocabulary extends Component {
     // ]
 
     let inputClassesWord = ['inputElement']
-    if (!this.state.vocabForm.word.validation.valid) {
+    if (!this.state.vocabForm.word.validation.valid && this.state.vocabForm.word.touched) {
       inputClassesWord.push('invalid')
     }
 
     let inputClassesTranslation = ['inputElement']
-    if (!this.state.vocabForm.translation.validation.valid) {
+    if (!this.state.vocabForm.translation.validation.valid && this.state.vocabForm.translation.touched) {
       inputClassesTranslation.push('invalid')
     }
 
