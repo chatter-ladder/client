@@ -40,7 +40,8 @@ class Vocabulary extends Component {
         },
         touched: false
       }
-    }
+    },
+    formIsValid: false
   }
 
   componentDidMount() {
@@ -123,7 +124,12 @@ class Vocabulary extends Component {
     updatedFormElement['validation'] = updatedFormValidity
     updatedVocabForm[inputIdentifier] = updatedFormElement;
     
-    this.setState({ vocabForm: updatedVocabForm })
+    let formIsValid = true;
+    for (let inputIdentifier in updatedVocabForm) {
+      formIsValid = updatedVocabForm[inputIdentifier]['validation'].valid && formIsValid;
+    }
+
+    this.setState({ vocabForm: updatedVocabForm, formIsValid: formIsValid })
   }
 
   render () {
@@ -202,7 +208,7 @@ class Vocabulary extends Component {
           {validationErrorWord}
           <input className={inputClassesTranslation.join(' ')} type='text' onChange={(event) => this.inputChangedHandler(event, 'translation')} value={this.state.vocabForm.translation.value} name='translation' placeholder="Enter translation" />
           {validationErrorTranslation}
-          <button>Submit</button>
+          <button disabled={!this.state.formIsValid}>Submit</button>
         </form>
 
         {/* <button onClick={this.addVocabHandler}>Add Word</button> */}
