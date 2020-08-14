@@ -65,13 +65,13 @@ class Vocabulary extends Component {
     return isValid;
   }
 
-  addVocabHandler = () => {
-    // event.preventDefault();
+  addVocabHandler = (event) => {
+    event.preventDefault();
     const vocabData = {
       user_id: 1,
-      word: 'gata',
+      word: this.state.vocabForm.word.value,
       word_language: 'spanish',
-      translation: 'cat',
+      translation: this.state.vocabForm.translation.value,
       translation_language: 'english'
     }
 
@@ -168,7 +168,7 @@ class Vocabulary extends Component {
           <button>Submit</button>
         </form>
 
-        <button onClick={this.addVocabHandler}>Add Word</button>
+        {/* <button onClick={this.addVocabHandler}>Add Word</button> */}
 
         <Table headings={headings} rows={this.state.vocab} />
 
