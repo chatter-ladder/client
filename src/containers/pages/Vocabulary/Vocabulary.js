@@ -5,6 +5,7 @@ import Table from '../../../components/UI/Table/Table';
 class Vocabulary extends Component {
 
   state = {
+    users: [],
     words: {
       elementType: 'input',
       elementConfig: {
@@ -29,6 +30,18 @@ class Vocabulary extends Component {
         required: true
       }
     }
+  }
+
+  componentDidMount() {
+    fetch('http://localhost:3001/users')
+      .then(response => {
+        if (response.ok) {
+          // console.log(response.json())
+          return response.json()
+        }
+        throw new Error("Networ response wasn't ok")
+      })
+      .then(data => this.setState({ users: data }))
   }
 
   checkValidity(value, rules) {
@@ -103,11 +116,11 @@ class Vocabulary extends Component {
       ]
     ]
 
-    addVocabHandler = ( event ) => {
-      event.preventDefault();
-      const vocabData = {}
+    // addVocabHandler = ( event ) => {
+    //   event.preventDefault();
+    //   const vocabData = {}
 
-    }
+    // }
 
     return (
       <>
