@@ -6,6 +6,7 @@ class Vocabulary extends Component {
 
   state = {
     users: [],
+    vocab:[],
     words: {
       elementType: 'input',
       elementConfig: {
@@ -33,28 +34,15 @@ class Vocabulary extends Component {
   }
 
   componentDidMount() {
-    // const data = { name: 'James', email: 'james@example.com'}
-    // fetch('http://localhost:3001/users', {
-    //   method: 'POST',
-    //   headers: {'Content-Type':'application/json'},
-    //   body:JSON.stringify(data)
-    // })
-    // .then(response => {
-    //   if (response.ok) {
-    //     return(response.json())
-    //   }
-    //   throw new Error("Network response wasn't ok")
-    // })
-    // .then(data => console.log(`${data.name} has been added to db`))
-   
-    // fetch('http://localhost:3001/users')
-    //   .then(response => {
-    //     if (response.ok) {
-    //       return response.json()
-    //     }
-    //     throw new Error("Networ response wasn't ok")
-    //   })
-    //   .then(data => this.setState({ users: data }))
+    const user_id = 1;
+    fetch(`http://localhost:3001/users/${user_id}/vocabulary`)
+      .then(response => {
+        if (response.ok) {
+          return response.json()
+        }
+        throw new Error("Networ response wasn't ok")
+      })
+      .then(data => this.setState({ vocab: data }))
   }
 
   checkValidity(value, rules) {
@@ -79,6 +67,7 @@ class Vocabulary extends Component {
     // event.preventDefault();
     console.log('adding word...')
     const vocabData = {
+      user_id: 1,
       word: 'gata',
       word_language: 'spanish',
       translation: 'cat',
