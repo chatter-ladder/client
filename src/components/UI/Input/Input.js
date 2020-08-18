@@ -1,14 +1,14 @@
 import React from 'react';
 
-import './Input.css';
+import classes from './Input.module.css';
 
 const Input = (props) => {
 
-    let inputClasses = ['inputElement']
+    let inputClasses = [classes.InputElement]
     let validationError = null;
     if (props.invalid) {
-      inputClasses.push('invalid')
-      validationError = <p className='validation'>Please enter a valid word</p>
+      inputClasses.push(classes.Invalid)
+      validationError = <p className='validation'>Please enter a valid {props.name}</p>
     }
 
     return (
