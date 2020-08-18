@@ -191,20 +191,6 @@ class Vocabulary extends Component {
     //   ]
     // ]
 
-    let inputClassesWord = ['inputElement']
-    let validationErrorWord = null;
-    if (!this.state.vocabForm.word.validation.valid && this.state.vocabForm.word.touched) {
-      inputClassesWord.push('invalid')
-      validationErrorWord = <p className='validation'>Please enter a valid word</p>
-    }
-
-    let inputClassesTranslation = ['inputElement']
-    let validationErrorTranslation = null;
-    if (!this.state.vocabForm.translation.validation.valid && this.state.vocabForm.translation.touched) {
-      inputClassesTranslation.push('invalid')
-      validationErrorTranslation = <p className='validation'>Please enter a valid Translation</p>
-    }
-
     return (
       <>
         <h1>Vocabulary List</h1>
@@ -221,14 +207,8 @@ class Vocabulary extends Component {
             onChange={(event) => this.inputChangedHandler(event, 'translation')}
             invalid={!this.state.vocabForm.translation.validation.valid && this.state.vocabForm.translation.touched}
           />
-          {/* <input className={inputClassesWord.join(' ')} type='texst' onChange={(event) => this.inputChangedHandler(event, 'word')} value={this.state.vocabForm.word.value} name='word' placeholder="Enter new word" />
-          {validationErrorWord} */}
-          {/* <input className={inputClassesTranslation.join(' ')} type='text' onChange={(event) => this.inputChangedHandler(event, 'translation')} value={this.state.vocabForm.translation.value} name='translation' placeholder="Enter translation" />
-          {validationErrorTranslation} */}
           <button disabled={!this.state.formIsValid}>Submit</button>
         </form>
-
-        {/* <button onClick={this.addVocabHandler}>Add Word</button> */}
 
         <Table headings={headings} rows={this.state.vocab} />
 
