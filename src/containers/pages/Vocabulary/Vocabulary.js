@@ -215,10 +215,16 @@ class Vocabulary extends Component {
             onChange={(event) => this.inputChangedHandler(event, 'word')}
             invalid={!this.state.vocabForm.word.validation.valid && this.state.vocabForm.word.touched}
           />
-          <input className={inputClassesWord.join(' ')} type='texst' onChange={(event) => this.inputChangedHandler(event, 'word')} value={this.state.vocabForm.word.value} name='word' placeholder="Enter new word" />
-          {validationErrorWord}
-          <input className={inputClassesTranslation.join(' ')} type='text' onChange={(event) => this.inputChangedHandler(event, 'translation')} value={this.state.vocabForm.translation.value} name='translation' placeholder="Enter translation" />
-          {validationErrorTranslation}
+          <Input 
+            name='translation'
+            placeholder={"Enter translation"}
+            onChange={(event) => this.inputChangedHandler(event, 'translation')}
+            invalid={!this.state.vocabForm.translation.validation.valid && this.state.vocabForm.translation.touched}
+          />
+          {/* <input className={inputClassesWord.join(' ')} type='texst' onChange={(event) => this.inputChangedHandler(event, 'word')} value={this.state.vocabForm.word.value} name='word' placeholder="Enter new word" />
+          {validationErrorWord} */}
+          {/* <input className={inputClassesTranslation.join(' ')} type='text' onChange={(event) => this.inputChangedHandler(event, 'translation')} value={this.state.vocabForm.translation.value} name='translation' placeholder="Enter translation" />
+          {validationErrorTranslation} */}
           <button disabled={!this.state.formIsValid}>Submit</button>
         </form>
 
