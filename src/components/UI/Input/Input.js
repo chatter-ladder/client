@@ -1,25 +1,26 @@
 import React from 'react';
 
+import './Input.css';
+
 const Input = (props) => {
 
-    // add logic to determine whether className should include invalid or not.
-
-    let inputClassesWord = ['inputElement']
-    let validationErrorWord = null;
+    let inputClasses = ['inputElement']
+    let validationError = null;
     if (props.invalid) {
-      inputClassesWord.push('invalid')
-      validationErrorWord = <p className='validation'>Please enter a valid word</p>
+      inputClasses.push('invalid')
+      validationError = <p className='validation'>Please enter a valid word</p>
     }
 
     return (
         <>
-            <input 
+            <input
+                className={inputClasses.join(' ')}
                 type='text'
                 name={props.name}
                 placeholder={props.placeholder}
                 onChange={props.onChange}
             />
-            {validationErrorWord}
+            {validationError}
         </>
 
     );
