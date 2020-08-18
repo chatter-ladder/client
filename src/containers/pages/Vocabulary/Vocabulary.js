@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import Table from '../../../components/UI/Table/Table';
+import Input from '../../../components/UI/Input/Input';
 import './Vocabulary.css'
 
 class Vocabulary extends Component {
@@ -208,7 +209,13 @@ class Vocabulary extends Component {
       <>
         <h1>Vocabulary List</h1>
         <form onSubmit={this.addVocabHandler}>
-          <input className={inputClassesWord.join(' ')} type='text' onChange={(event) => this.inputChangedHandler(event, 'word')} value={this.state.vocabForm.word.value} name='word' placeholder="Enter new word" />
+          <Input 
+            name='word'
+            placeholder={"Enter new word"}
+            onChange={(event) => this.inputChangedHandler(event, 'word')}
+            invalid={!this.state.vocabForm.word.validation.valid && this.state.vocabForm.word.touched}
+          />
+          <input className={inputClassesWord.join(' ')} type='texst' onChange={(event) => this.inputChangedHandler(event, 'word')} value={this.state.vocabForm.word.value} name='word' placeholder="Enter new word" />
           {validationErrorWord}
           <input className={inputClassesTranslation.join(' ')} type='text' onChange={(event) => this.inputChangedHandler(event, 'translation')} value={this.state.vocabForm.translation.value} name='translation' placeholder="Enter translation" />
           {validationErrorTranslation}
