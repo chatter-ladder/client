@@ -18,6 +18,7 @@ const Input = (props) => {
                 type='text'
                 name={props.name}
                 placeholder={props.placeholder}
+                value={props.value}
                 onChange={props.onChange}
             />
             {validationError}

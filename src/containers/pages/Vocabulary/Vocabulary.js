@@ -37,7 +37,7 @@ class Vocabulary extends Component {
           valid: false,
           required: true,
           minLength: 1,
-          maxLength: 20
+          maxLength: 40
         },
         touched: false
       }
@@ -104,7 +104,26 @@ class Vocabulary extends Component {
       }
       throw new Error("Network response wasn't ok")
     })
-    .then(text => console.log(text))
+    .then(text => {
+      let updatedForm = {
+        ...this.state.vocabForm,
+      };
+      let updatedFormWord = {
+        ...updatedForm.word,
+        value: ''
+      };
+      let updatedFormTranslation = {
+        ...updatedForm.translation,
+        value: ''
+      };
+      updatedForm.word = updatedFormWord
+      updatedForm.translation = updatedFormTranslation
+
+      console.log(updatedForm)
+
+      this.setState({ vocabForm: updatedForm })
+      // console.log(text)
+    })
 
   }
 
@@ -198,12 +217,14 @@ class Vocabulary extends Component {
           <Input 
             name='word'
             placeholder={"Enter new word"}
+            value={this.state.vocabForm.word.value}
             onChange={(event) => this.inputChangedHandler(event, 'word')}
             invalid={!this.state.vocabForm.word.validation.valid && this.state.vocabForm.word.touched}
           />
           <Input 
             name='translation'
             placeholder={"Enter translation"}
+            value={this.state.vocabForm.translation.value}
             onChange={(event) => this.inputChangedHandler(event, 'translation')}
             invalid={!this.state.vocabForm.translation.validation.valid && this.state.vocabForm.translation.touched}
           />
