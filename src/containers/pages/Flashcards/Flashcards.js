@@ -9,15 +9,19 @@ class Flashcards extends Component {
   }
 
   increaseFlashcardsHandler = () => {
-    this.setState(prevState => {
-      return { numFlashcards: prevState.numFlashcards + 1 }
-    })
+    if (this.state.numFlashcards < 30) {
+      this.setState(prevState => {
+        return { numFlashcards: prevState.numFlashcards + 1 }
+      })
+    }
   }
 
   decreaseFlashcardsHandler = () => {
-    this.setState(prevState => {
-      return { numFlashcards: prevState.numFlashcards - 1 }
-    })
+    if (this.state.numFlashcards > 5) {
+      this.setState(prevState => {
+        return { numFlashcards: prevState.numFlashcards - 1 }
+      })
+    }
   }
 
   render () {
