@@ -13,7 +13,6 @@ class Flashcards extends Component {
   }
 
   componentDidMount () {
-    // fetch from server the number of vocab words user has in database
     const user_id = 1;
     fetch(`http://localhost:3001/users/${user_id}/vocabulary/count`)
       .then(response => {
@@ -45,9 +44,18 @@ class Flashcards extends Component {
     return (
       <>
         <h1>Flashcards page</h1>
-    <div>{this.state.numFlashcards}</div>
-        <button onClick={this.increaseFlashcardsHandler}>+</button>
-        <button onClick={this.decreaseFlashcardsHandler}>-</button>
+        {
+          this.state.countVocabList > 5
+          ?
+          <>
+            <div>{this.state.numFlashcards}</div>
+            <button onClick={this.increaseFlashcardsHandler}>+</button>
+            <button onClick={this.decreaseFlashcardsHandler}>-</button>
+          </>
+          :
+          <p>You need to have at least 5 words in your vocab list. Please add more words on the Vocabulary page</p>
+        }
+
         <Flashcard />
       </>
     )
