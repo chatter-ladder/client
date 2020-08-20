@@ -51,6 +51,7 @@ class Flashcards extends Component {
             <div>{this.state.numFlashcards}</div>
             <button onClick={this.increaseFlashcardsHandler}>+</button>
             <button onClick={this.decreaseFlashcardsHandler}>-</button>
+            <button onClick={this.startFlashcardsHandler}>start</button>
           </>
           :
           <p>You need to have at least 5 words in your vocab list. Please add more words on the Vocabulary page</p>
