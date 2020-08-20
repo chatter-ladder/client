@@ -63,8 +63,26 @@ class Flashcards extends Component {
       throw new Error("Network response wasn't ok")
     })
     .then(data => {
-      this.setState({ flashcardsVocab: data, showFlashcards: true })
+      let vocabData = []
+      data.map(vocab => {
+        let updatedVocab = {
+          ...vocab,
+          seen: false,
+          correct: false,
+          incorrect: false
+        }
+        vocabData.push(updatedVocab)
+      })
+      this.setState({ flashcardsVocab: vocabData, showFlashcards: true })
     })
+  }
+
+  correctHandler = () => {
+    
+  }
+
+  incorrectHandler = () => {
+
   }
 
   nextFlashcardHandler = () => {
@@ -100,6 +118,8 @@ class Flashcards extends Component {
                 front={this.state.flashcardsVocab[this.state.showFlashcardNumber].word}
                 back={this.state.flashcardsVocab[this.state.showFlashcardNumber].translation}
               />
+              <button>Correct</button>
+              <button>Incorrect</button>
               <button onClick={this.nextFlashcardHandler} disabled={nextDisabled}>Next</button>
             </>
           :
