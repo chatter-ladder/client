@@ -12,7 +12,12 @@ class Flashcards extends Component {
     countVocabList: 0,
     flashcardsVocab: [],
     showFlashcards: false,
-    showFlashcardNumber: 0
+    showFlashcardNumber: 0,
+    progress: {
+      numCorrect: 0,
+      numIncorrect: 0,
+      numRemaining: 0
+    }
   }
 
   componentDidMount () {
@@ -73,8 +78,28 @@ class Flashcards extends Component {
         }
         vocabData.push(updatedVocab)
       })
-      this.setState({ flashcardsVocab: vocabData, showFlashcards: true })
+      const updatedProgress = this.updateProgress(vocabData)
+      this.setState({ flashcardsVocab: vocabData, showFlashcards: true, progress: updatedProgress })
     })
+  }
+  updateProgress = (vocabList) => {
+    let updatedProgress = {
+      numCorrect: 0,
+      numIncorrect: 0,
+      numRemaining: this.state.numFlashcards
+    }
+    vocabList.map(vocab => {
+      if (vocab.seen) {
+        updatedProgress.numRemaining--
+      }
+      if (vocab.correct) {
+        updatedProgress.numCorrect++
+      }
+      if (vocab.incorrect) {
+        updatedProgress.numIncorrect++
+      }
+    })
+    return updatedProgress
   }
 
   correctHandler = () => {
@@ -89,7 +114,8 @@ class Flashcards extends Component {
       }
       return vocab
     })
-    this.setState({ flashcardsVocab: updatedVocabList })
+    const updatedProgress = this.updateProgress(updatedVocabList)
+    this.setState({ flashcardsVocab: updatedVocabList, progress: updatedProgress })
   }
 
   incorrectHandler = () => {
@@ -104,7 +130,8 @@ class Flashcards extends Component {
       }
       return vocab
     })
-    this.setState({ flashcardsVocab: updatedVocabList })
+    const updatedProgress = this.updateProgress(updatedVocabList)
+    this.setState({ flashcardsVocab: updatedVocabList, progress: updatedProgress })
   }
 
   nextFlashcardHandler = () => {
@@ -122,7 +149,6 @@ class Flashcards extends Component {
   render () {
 
     const nextDisabled = this.state.numFlashcards === this.state.showFlashcardNumber + 1;
-    console.log(nextDisabled)
     const previousDisabled = this.state.showFlashcardNumber === 0;
 
     return (
@@ -141,6 +167,7 @@ class Flashcards extends Component {
             this.state.showFlashcards
           ?
             <>
+              <p>{this.state.progress.numCorrect} correct, {this.state.progress.numIncorrect} incorrect. {this.state.progress.numRemaining} Flashcards to go</p>
               <Flashcard 
                 front={this.state.flashcardsVocab[this.state.showFlashcardNumber].word}
                 back={this.state.flashcardsVocab[this.state.showFlashcardNumber].translation}
