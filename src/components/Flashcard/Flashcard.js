@@ -3,27 +3,21 @@ import classes from './Flashcard.module.css';
 
 class Flashcard extends Component {
 
-  state = {
-    flipped: false,
-  }
-
-  flipHandler = () => {
-    this.setState(prevState => ({
-      flipped: !prevState.flipped
-    }));
-  };
-
   flashcardClasses = () => {
-    if (this.state.flipped) {
-      return `${classes.Flashcard} ${classes.Flipped}`
+    let updatedClasses = [ classes.Flashcard ]
+    if (this.props.flipped ) {
+      updatedClasses.push(classes.Flipped)
     }
-    return classes.Flashcard
+    if (this.props.transition) {
+      updatedClasses.push(classes.Transition)
+    }
+    return updatedClasses.join(" ");
   }
 
   render() {
     return(
       <div className={classes.Container}>
-        <div className={this.flashcardClasses()} onClick={this.flipHandler}>
+        <div className={this.flashcardClasses()} onClick={this.props.clicked}>
           <div className={`${classes.Pattern} ${classes.Front}`}>
             <div className={classes.Content}>
               <h4>{this.props.front}</h4>

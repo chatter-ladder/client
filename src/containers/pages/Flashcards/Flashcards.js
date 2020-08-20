@@ -17,7 +17,9 @@ class Flashcards extends Component {
       numCorrect: 0,
       numIncorrect: 0,
       numRemaining: 0
-    }
+    },
+    flipped: false,
+    transition: true
   }
 
   componentDidMount () {
@@ -136,15 +138,22 @@ class Flashcards extends Component {
 
   nextFlashcardHandler = () => {
     this.setState(prevState => {
-      return { showFlashcardNumber: prevState.showFlashcardNumber + 1 }
+      return { showFlashcardNumber: prevState.showFlashcardNumber + 1, flipped: false, transition: false }
     })
   }
 
   previousFlashcardHandler = () => {
     this.setState(prevState => {
-      return { showFlashcardNumber: prevState.showFlashcardNumber - 1 }
+      return { showFlashcardNumber: prevState.showFlashcardNumber - 1, flipped: false, transition: false }
     })
   }
+
+  flipHandler = () => {
+    this.setState(prevState => ({
+      flipped: !prevState.flipped,
+      transition: true
+    }));
+  };
 
   render () {
 
@@ -171,6 +180,9 @@ class Flashcards extends Component {
               <Flashcard 
                 front={this.state.flashcardsVocab[this.state.showFlashcardNumber].word}
                 back={this.state.flashcardsVocab[this.state.showFlashcardNumber].translation}
+                flipped={this.state.flipped}
+                clicked={this.flipHandler}
+                transition={this.state.transition}
               />
               <button onClick={this.correctHandler}>Correct</button>
               <button onClick={this.incorrectHandler}>Incorrect</button>
