@@ -9,7 +9,8 @@ class Flashcards extends Component {
 
   state = {
     numFlashcards: MINIMUM_FLASHCARDS,
-    countVocabList: 0
+    countVocabList: 0,
+    flashcardsVocab: []
   }
 
   componentDidMount () {
@@ -40,6 +41,30 @@ class Flashcards extends Component {
     }
   }
 
+  startFlashcardsHandler = () => {
+
+    const flashcardRequirements = {
+      user_id: 1,
+      number: this.state.numFlashcards
+    }
+
+    fetch('http://localhost:3001/flashcards', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json', 'Accept': 'application/json'},
+      body:JSON.stringify(flashcardRequirements)
+    })
+    .then(response => {
+      console.log(response)
+      if (response.ok) {
+        return(response.json())
+      }
+      throw new Error("Network response wasn't ok")
+    })
+    .then(data => {
+      this.setState({ flashcardsVocab: data })
+    })
+  }
+
   render () {
     return (
       <>
@@ -49,8 +74,8 @@ class Flashcards extends Component {
           ?
           <>
             <div>{this.state.numFlashcards}</div>
-            <button onClick={this.increaseFlashcardsHandler}>+</button>
             <button onClick={this.decreaseFlashcardsHandler}>-</button>
+            <button onClick={this.increaseFlashcardsHandler}>+</button>
             <button onClick={this.startFlashcardsHandler}>start</button>
           </>
           :
