@@ -113,12 +113,16 @@ class Flashcards extends Component {
     })
   }
 
+  previousFlashcardHandler = () => {
+    this.setState(prevState => {
+      return { showFlashcardNumber: prevState.showFlashcardNumber - 1 }
+    })
+  }
+
   render () {
 
     const nextDisabled = this.state.numFlashcards === this.state.showFlashcardNumber + 1;
-    console.log()
-    console.log(nextDisabled);
-    // const previousDisabled = this.state.showFlashcardNumber === 0;
+    const previousDisabled = this.state.showFlashcardNumber === 0;
 
     return (
       <>
@@ -142,6 +146,7 @@ class Flashcards extends Component {
               />
               <button onClick={this.correctHandler}>Correct</button>
               <button onClick={this.incorrectHandler}>Incorrect</button>
+              <button onClick={this.previousFlashcardHandler} disabled={previousDisabled}>Previous</button>
               <button onClick={this.nextFlashcardHandler} disabled={nextDisabled}>Next</button>
             </>
           :
