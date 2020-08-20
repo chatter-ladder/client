@@ -52,7 +52,7 @@ class Vocabulary extends Component {
         if (response.ok) {
           return response.json()
         }
-        throw new Error("Networ response wasn't ok")
+        throw new Error("Network response wasn't ok")
       })
       .then(data => this.setState({ vocab: data }))
   }
