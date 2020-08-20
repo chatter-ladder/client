@@ -26,12 +26,12 @@ class Flashcard extends Component {
         <div className={this.flashcardClasses()} onClick={this.flipHandler}>
           <div className={`${classes.Pattern} ${classes.Front}`}>
             <div className={classes.Content}>
-              <h4>This is the front</h4>
+              <h4>{this.props.front}</h4>
             </div>
           </div>
           <div className={`${classes.Pattern} ${classes.Back}`}>
             <div className={classes.Content}>
-              <h4>And this is the Back</h4>
+              <h4>{this.props.back}</h4>
             </div>
           </div>
         </div>

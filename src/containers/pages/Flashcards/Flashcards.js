@@ -82,7 +82,10 @@ class Flashcards extends Component {
           :
             this.state.showFlashcards
           ?
-            <Flashcard />
+            <Flashcard 
+              front={this.state.flashcardsVocab[0].word}
+              back={this.state.flashcardsVocab[0].translation}
+            />
           :
           <p>You need to have at least 5 words in your vocab list. Please add more words on the Vocabulary page</p>
         }
