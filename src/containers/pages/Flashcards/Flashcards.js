@@ -10,7 +10,8 @@ class Flashcards extends Component {
   state = {
     numFlashcards: MINIMUM_FLASHCARDS,
     countVocabList: 0,
-    flashcardsVocab: []
+    flashcardsVocab: [],
+    showFlashcards: false
   }
 
   componentDidMount () {
@@ -61,7 +62,7 @@ class Flashcards extends Component {
       throw new Error("Network response wasn't ok")
     })
     .then(data => {
-      this.setState({ flashcardsVocab: data })
+      this.setState({ flashcardsVocab: data, showFlashcards: true })
     })
   }
 
@@ -70,7 +71,7 @@ class Flashcards extends Component {
       <>
         <h1>Flashcards page</h1>
         {
-          this.state.countVocabList > 5
+          this.state.countVocabList > 5 && !this.state.showFlashcards
           ?
           <>
             <div>{this.state.numFlashcards}</div>
@@ -79,10 +80,13 @@ class Flashcards extends Component {
             <button onClick={this.startFlashcardsHandler}>start</button>
           </>
           :
+            this.state.showFlashcards
+          ?
+            <Flashcard />
+          :
           <p>You need to have at least 5 words in your vocab list. Please add more words on the Vocabulary page</p>
         }
 
-        <Flashcard />
       </>
     )
   }
