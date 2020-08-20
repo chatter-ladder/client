@@ -78,7 +78,18 @@ class Flashcards extends Component {
   }
 
   correctHandler = () => {
-    
+    const updatedVocabList = this.state.flashcardsVocab.map((vocab, index) => {
+      if (index === this.state.showFlashcardNumber) {
+        return {
+          ...vocab,
+          seen: true,
+          correct: true
+        }
+      }
+      return vocab
+    })
+    console.log(updatedVocabList)
+    this.setState({ flashcardsVocab: updatedVocabList })
   }
 
   incorrectHandler = () => {
@@ -118,7 +129,7 @@ class Flashcards extends Component {
                 front={this.state.flashcardsVocab[this.state.showFlashcardNumber].word}
                 back={this.state.flashcardsVocab[this.state.showFlashcardNumber].translation}
               />
-              <button>Correct</button>
+              <button onClick={this.correctHandler}>Correct</button>
               <button>Incorrect</button>
               <button onClick={this.nextFlashcardHandler} disabled={nextDisabled}>Next</button>
             </>
