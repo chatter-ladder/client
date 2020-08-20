@@ -83,12 +83,12 @@ class Flashcards extends Component {
         return {
           ...vocab,
           seen: true,
-          correct: true
+          correct: true,
+          incorrect: false
         }
       }
       return vocab
     })
-    console.log(updatedVocabList)
     this.setState({ flashcardsVocab: updatedVocabList })
   }
 
