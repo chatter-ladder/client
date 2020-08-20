@@ -122,6 +122,7 @@ class Flashcards extends Component {
   render () {
 
     const nextDisabled = this.state.numFlashcards === this.state.showFlashcardNumber + 1;
+    console.log(nextDisabled)
     const previousDisabled = this.state.showFlashcardNumber === 0;
 
     return (
@@ -147,7 +148,7 @@ class Flashcards extends Component {
               <button onClick={this.correctHandler}>Correct</button>
               <button onClick={this.incorrectHandler}>Incorrect</button>
               <button onClick={this.previousFlashcardHandler} disabled={previousDisabled}>Previous</button>
-              <button onClick={this.nextFlashcardHandler} disabled={nextDisabled}>Next</button>
+              <button onClick={this.nextFlashcardHandler} disabled={nextDisabled || !this.state.flashcardsVocab[this.state.showFlashcardNumber].seen}>Next</button>
             </>
           :
           <p>You need to have at least 5 words in your vocab list. Please add more words on the Vocabulary page</p>
