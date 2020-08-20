@@ -11,7 +11,8 @@ class Flashcards extends Component {
     numFlashcards: MINIMUM_FLASHCARDS,
     countVocabList: 0,
     flashcardsVocab: [],
-    showFlashcards: false
+    showFlashcards: false,
+    showFlashcardNumber: 0
   }
 
   componentDidMount () {
@@ -66,6 +67,12 @@ class Flashcards extends Component {
     })
   }
 
+  nextFlashcardHandler = () => {
+    this.setState(prevState => {
+      return { showFlashcardNumber: prevState.showFlashcardNumber + 1 }
+    })
+  }
+
   render () {
     return (
       <>
@@ -82,10 +89,13 @@ class Flashcards extends Component {
           :
             this.state.showFlashcards
           ?
-            <Flashcard 
-              front={this.state.flashcardsVocab[0].word}
-              back={this.state.flashcardsVocab[0].translation}
-            />
+            <>
+              <Flashcard 
+                front={this.state.flashcardsVocab[this.state.showFlashcardNumber].word}
+                back={this.state.flashcardsVocab[this.state.showFlashcardNumber].translation}
+              />
+              <button onClick={this.nextFlashcardHandler}>Next</button>
+            </>
           :
           <p>You need to have at least 5 words in your vocab list. Please add more words on the Vocabulary page</p>
         }
