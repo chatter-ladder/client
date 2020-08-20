@@ -8,11 +8,21 @@ const MAXIMUM_FLASHCARDS = 30;
 class Flashcards extends Component {
 
   state = {
-    numFlashcards: MINIMUM_FLASHCARDS
+    numFlashcards: MINIMUM_FLASHCARDS,
+    countVocabList: 0
   }
 
   componentDidMount () {
     // fetch from server the number of vocab words user has in database
+    const user_id = 1;
+    fetch(`http://localhost:3001/users/${user_id}/vocabulary/count`)
+      .then(response => {
+        if (response.ok) {
+          return response.json()
+        }
+        throw new Error("Network response wasn't ok")
+      })
+      .then(data => this.setState({ countVocabList: data }))
   }
 
   increaseFlashcardsHandler = () => {
