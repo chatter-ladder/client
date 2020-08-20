@@ -26,7 +26,7 @@ class Flashcards extends Component {
   }
 
   increaseFlashcardsHandler = () => {
-    if (this.state.numFlashcards < MAXIMUM_FLASHCARDS) {
+    if (this.state.numFlashcards < Math.min(MAXIMUM_FLASHCARDS, this.state.countVocabList)) {
       this.setState(prevState => {
         return { numFlashcards: prevState.numFlashcards + 1 }
       })
