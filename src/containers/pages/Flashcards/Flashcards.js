@@ -188,6 +188,7 @@ class Flashcards extends Component {
               <button onClick={this.incorrectHandler}>Incorrect</button>
               <button onClick={this.previousFlashcardHandler} disabled={previousDisabled}>Previous</button>
               <button onClick={this.nextFlashcardHandler} disabled={nextDisabled || !this.state.flashcardsVocab[this.state.showFlashcardNumber].seen}>Next</button>
+              <button>Finish</button>
             </>
           :
           <p>You need to have at least 5 words in your vocab list. Please add more words on the Vocabulary page</p>
