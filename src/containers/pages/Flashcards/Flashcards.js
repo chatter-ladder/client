@@ -217,7 +217,7 @@ class Flashcards extends Component {
           :
             this.state.showSummary
             ?
-            <FlashcardSummary />
+            <FlashcardSummary summary={this.state.flashcardsVocab} />
             :
           <p>You need to have at least 5 words in your vocab list. Please add more words on the Vocabulary page</p>
         }

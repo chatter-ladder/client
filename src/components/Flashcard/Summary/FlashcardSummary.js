@@ -1,8 +1,24 @@
 import React from 'react';
 
-const FlashcardSummary = () => {
+import Table from '../../../components/UI/Table/Table';
+
+const FlashcardSummary = (props) => {
+    const headings = [
+        'Word',
+        'Translation',
+        'Result'
+    ]
+
+    const summaryRows = props.summary.map(row => {
+        return [
+            'something',
+            'something',
+            'something'
+        ]
+    })
+
     return (
-        <p>This is the FlashcardSummary</p>
+        <Table headings={headings} rows={summaryRows} />
     )
 }
 

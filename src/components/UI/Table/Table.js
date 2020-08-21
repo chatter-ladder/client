@@ -31,8 +31,6 @@ class Table extends Component {
   }
 
   renderBodyRow = (row, rowIndex) => {
-    // console.log(`rowIndex: ${rowIndex}`)
-    // console.log(this.state.cellHeights[rowIndex + 1])
     return (
       <tr key={rowIndex}>
         <Cell
