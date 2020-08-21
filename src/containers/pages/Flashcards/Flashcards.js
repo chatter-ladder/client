@@ -175,8 +175,10 @@ class Flashcards extends Component {
       console.log(text)
     })
     this.setState({ showSummary: true, showFlashcards: false })
+  }
 
-    
+  startAgainHandler = () => {
+    this.setState({ showSummary: false, showFlashcards: false, showFlashcardNumber: 0 })
   }
 
   render () {
@@ -217,7 +219,10 @@ class Flashcards extends Component {
           :
             this.state.showSummary
             ?
-            <FlashcardSummary summary={this.state.flashcardsVocab} />
+            <>
+              <FlashcardSummary summary={this.state.flashcardsVocab} />
+              <button onClick={this.startAgainHandler}>Start Again</button>
+            </>
             :
           <p>You need to have at least 5 words in your vocab list. Please add more words on the Vocabulary page</p>
         }
