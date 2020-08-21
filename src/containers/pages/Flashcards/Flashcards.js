@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import Flashcard from '../../../components/Flashcard/Flashcard';
+import FlashcardSummary from '../../../components/Flashcard/Summary/FlashcardSummary';
 
 const MINIMUM_FLASHCARDS = 5;
 const MAXIMUM_FLASHCARDS = 30;
@@ -79,7 +80,7 @@ class Flashcards extends Component {
           correct: false,
           incorrect: false
         }
-        vocabData.push(updatedVocab)
+        return vocabData.push(updatedVocab)
       })
       const updatedProgress = this.updateProgress(vocabData)
       this.setState({ flashcardsVocab: vocabData, showFlashcards: true, progress: updatedProgress })
@@ -101,6 +102,7 @@ class Flashcards extends Component {
       if (vocab.incorrect) {
         updatedProgress.numIncorrect++
       }
+      return 'done';
     })
     return updatedProgress
   }
@@ -157,7 +159,24 @@ class Flashcards extends Component {
   };
 
   flashcardFinishHandler = () => {
-    this.setState({ showSummary: true })
+    fetch('http://localhost:3001/flashcards/completed', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json', 'Accept': 'application/json'},
+      body:JSON.stringify(this.state.flashcardsVocab)
+    })
+    .then(response => {
+      console.log(response)
+      if (response.ok) {
+        return(response.text())
+      }
+      throw new Error("Network response wasn't ok")
+    })
+    .then(text => {
+      console.log(text)
+    })
+    this.setState({ showSummary: true, showFlashcards: false })
+
+    
   }
 
   render () {
@@ -169,7 +188,7 @@ class Flashcards extends Component {
       <>
         <h1>Flashcards page</h1>
         {
-          this.state.countVocabList > 5 && !this.state.showFlashcards
+          this.state.countVocabList > 5 && !this.state.showFlashcards && !this.state.showSummary
           ?
           <>
             <div>{this.state.numFlashcards}</div>
@@ -196,6 +215,10 @@ class Flashcards extends Component {
               <button onClick={this.flashcardFinishHandler}>Finish</button>
             </>
           :
+            this.state.showSummary
+            ?
+            <FlashcardSummary />
+            :
           <p>You need to have at least 5 words in your vocab list. Please add more words on the Vocabulary page</p>
         }
 
