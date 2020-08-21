@@ -18,7 +18,6 @@ class Table extends Component {
   }
 
   renderHeadingRow = (content, colIndex) => {
-    // console.log(this.state.cellHeights)
     return (
       <Cell
         key={content}
@@ -31,39 +30,9 @@ class Table extends Component {
   }
 
   renderBodyRow = (row, rowIndex) => {
-    // console.log(`rowIndex: ${rowIndex}`)
-    // console.log(this.state.cellHeights[rowIndex + 1])
     return (
       <tr key={rowIndex}>
-        <Cell
-          key={`${rowIndex}-${1}`}
-          content={row.word}
-          header={false}
-          fixed={true}
-          height={this.state.cellHeights[rowIndex + 1]}
-        />
-        <Cell
-          key={`${rowIndex}-${2}`}
-          content={row.translation}
-          header={false}
-          fixed={false}
-          height={this.state.cellHeights[rowIndex + 1]}
-        />
-        <Cell
-          key={`${rowIndex}-${3}`}
-          content={''}
-          header={false}
-          fixed={false}
-          height={this.state.cellHeights[rowIndex + 1]}
-        />
-        <Cell
-          key={`${rowIndex}-${4}`}
-          content={row.progress}
-          header={false}
-          fixed={false}
-          height={this.state.cellHeights[rowIndex + 1]}
-        />
-        {/* {row.map((content, contentIndex) => {
+        {row.map((content, contentIndex) => {
           return (
             <Cell
               key={`${rowIndex}-${contentIndex}`}
@@ -73,7 +42,7 @@ class Table extends Component {
               height={this.state.cellHeights[rowIndex + 1]}
             />
           )
-        })} */}
+        })}
       </tr>
     )
   }
@@ -102,16 +71,6 @@ class Table extends Component {
     )
 
     const bodyRows = this.props.rows.map(this.renderBodyRow)
-
-    // const bodyRows = (
-    //   this.props.rows.map((row, rowIndex) => {
-    //     return (
-    //       <tr key={rowIndex}>
-    //         {row.map((content, contentIndex) => this.renderBodyRow(content, rowIndex, contentIndex))}
-    //       </tr>
-    //     )
-    //   })
-    // );
 
     return (
       <div className={classes.Container}>

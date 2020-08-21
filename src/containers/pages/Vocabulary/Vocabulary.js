@@ -165,6 +165,9 @@ class Vocabulary extends Component {
       'Learning Status'
     ];
 
+    const rows = this.state.vocab.map(row => {
+      return [row.word, row.translation, '', row.progress]
+    })
     // const rows = [
     //   [
     //     'hola',
@@ -231,7 +234,7 @@ class Vocabulary extends Component {
           <button disabled={!this.state.formIsValid}>Submit</button>
         </form>
 
-        <Table headings={headings} rows={this.state.vocab} />
+        <Table headings={headings} rows={rows} />
 
       </>
     );
