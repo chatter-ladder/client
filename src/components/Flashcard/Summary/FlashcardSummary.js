@@ -10,10 +10,14 @@ const FlashcardSummary = (props) => {
     ]
 
     const summaryRows = props.summary.map(row => {
+        let result = 'incorrect';
+        if (row.correct) {
+            result = 'correct'
+        }
         return [
-            'something',
-            'something',
-            'something'
+            row.word,
+            row.translation,
+            result
         ]
     })
 
