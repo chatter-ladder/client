@@ -6,6 +6,8 @@ import Home from './pages/Home/Home';
 import Profile from './pages/Profile/Profile';
 import Flashcards from './pages/Flashcards/Flashcards';
 import Vocabulary from './pages/Vocabulary/Vocabulary';
+import Login from './pages/Authentication/Login';
+import Register from './pages/Authentication/Register';
 
 // import './App.css';
 
@@ -18,6 +20,8 @@ class App extends Component {
           <Route path='/profile' component={Profile} />
           <Route path='/flashcards' component={Flashcards} />
           <Route path='/vocabulary' component={Vocabulary} />
+          <Route path='/login' component={Login} />
+          <Route path='/register' component={Register} />
       </>
     );
   }
