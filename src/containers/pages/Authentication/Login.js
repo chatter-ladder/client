@@ -39,7 +39,7 @@ class Register extends Component {
                     />
                 </form>
                 <Link>Forgotten password?</Link>
-                <div>Not a user? <Link to="/register">Sign up now</Link></div>
+                <div>Not a user? <Link to="/register">Sign up now</Link></div   >
             </>
         )
     }
