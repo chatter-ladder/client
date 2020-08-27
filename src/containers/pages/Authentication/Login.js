@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 import Input from '../../../components/UI/Input/Input';
 
@@ -39,7 +39,7 @@ class Register extends Component {
                     />
                 </form>
                 <Link>Forgotten password?</Link>
-                <div>Not a user? <Link to="/register">Sign up now</Link></div   >
+                <div>Not a user? <Link to="/register">Sign up now</Link></div>
             </>
         )
     }
