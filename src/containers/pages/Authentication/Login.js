@@ -80,6 +80,7 @@ class Login extends Component {
                         placeholder='Enter email address'
                         value={this.state.controls.email.value}
                         onChange={(event) => this.onChangeHandler(event, 'email')}
+                        invalid={!this.state.controls.email.valid && this.state.controls.email.touched}
                     />
                     <Input 
                         type='password'
@@ -87,6 +88,7 @@ class Login extends Component {
                         placeholder='Enter password'
                         value={this.state.controls.password.value}
                         onChange={(event) => this.onChangeHandler(event, 'password')}
+                        invalid={!this.state.controls.password.valid && this.state.controls.password.touched}
                     />
                     <button type='submit'>Log In</button>
                 </form>
