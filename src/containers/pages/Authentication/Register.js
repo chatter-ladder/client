@@ -92,36 +92,32 @@ class Register extends Component {
             <>
                 <form>
                     <Input 
-                        className='placeholder'
-                        type='text'
                         name='username'
                         placeholder='Enter a username'
                         value={this.state.username}
                         onChange={(event) => this.onChangeHandler(event, 'username')}
+                        invalid={!this.state.controls.username.valid && this.state.controls.username.touched}
                     />
-                                    <Input 
-                        className='placeholder'
-                        type='email'
+                    <Input 
                         name='email'
                         placeholder='Enter email address'
                         value={this.state.email}
                         onChange={(event) => this.onChangeHandler(event, 'email')}
+                        invalid={!this.state.controls.email.valid && this.state.controls.email.touched}
                     />
-                                    <Input 
-                        className='placeholder'
-                        type='password'
+                    <Input 
                         name='password'
                         placeholder='Enter password'
                         value={this.state.password}
                         onChange={(event) => this.onChangeHandler(event, 'password')}
+                        invalid={!this.state.controls.password.valid && this.state.controls.password.touched}
                     />
                     <Input 
-                        className='placeholder'
-                        type='password'
                         name='confirmPassword'
                         placeholder='Confirm password'
                         value={this.state.confirmPassword}
                         onChange={(event) => this.onChangeHandler(event, 'confirmPassword')}
+                        invalid={!this.state.controls.confirmPassword.valid && this.state.controls.confirmPassword.touched}
                     />
                     <button type='submit'>Sign Up!</button>
                 </form>
