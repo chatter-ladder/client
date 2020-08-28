@@ -6,8 +6,22 @@ import Input from '../../../components/UI/Input/Input';
 class Register extends Component {
 
     state = {
-        email: '',
-        password: '',
+        email: {
+            value: '',
+            validation: {
+                required: true
+            },
+            valid: false,
+            touched: false
+        },
+        password: {
+            value: '',
+            validation: {
+                required: true
+            },
+            valid: false,
+            touched: false
+        },
     }
 
     onChangeHandler = (event, formElement) => {
