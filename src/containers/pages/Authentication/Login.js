@@ -70,10 +70,35 @@ class Login extends Component {
         })
     }
 
+    submitHandler = (event) => {
+        event.preventDefault();
+
+        const usersDetails = {
+            email: this.state.controls.email.value,
+            password: this.state.controls.password.value
+          }
+      
+          fetch('http://localhost:3001/users/login', {
+            method: 'POST',
+            headers: {'Content-Type':'application/json', 'Accept': 'application/json'},
+            body:JSON.stringify(usersDetails)
+          })
+          .then(response => {
+            console.log(response)
+            if (response.ok) {
+              return(response.json())
+            }
+            throw new Error("Network response wasn't ok")
+          })
+          .then(data => {
+            console.log(data)
+          })
+    }
+
     render () {
         return (
             <>
-                <form>
+                <form onSubmit={this.submitHandler}>
                     <Input 
                         type='email'
                         name='email'
