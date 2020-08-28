@@ -37,6 +37,7 @@ class Register extends Component {
                         value={this.state.password}
                         onChange={(event) => this.onChangeHandler(event, 'password')}
                     />
+                    <button type='submit'>Log In</button>
                 </form>
                 <Link>Forgotten password?</Link>
                 <div>Not a user? <Link to="/register">Sign up now</Link></div>

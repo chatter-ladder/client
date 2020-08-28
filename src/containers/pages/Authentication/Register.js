@@ -6,10 +6,40 @@ import Input from '../../../components/UI/Input/Input';
 class Register extends Component {
 
     state = {
-        username: '',
-        email: '',
-        password: '',
-        confirmPassword: ''
+        controls: {
+            username: {
+                value: '',
+                validation: {
+                    required: true
+                },
+                valid: false,
+                touched: false
+            },
+            email: {
+                value: '',
+                validation: {
+                    required: true
+                },
+                valid: false,
+                touched: false
+            },
+            password: {
+                value: '',
+                validation: {
+                    required: true
+                },
+                valid: false,
+                touched: false
+            },
+            confirmPassword: {
+                value: '',
+                validation: {
+                    required: true
+                },
+                valid: false,
+                touched: false
+            }
+        }
     }
 
     onChangeHandler = (event, formElement) => {
@@ -47,7 +77,7 @@ class Register extends Component {
                         value={this.state.password}
                         onChange={(event) => this.onChangeHandler(event, 'password')}
                     />
-                                    <Input 
+                    <Input 
                         className='placeholder'
                         type='password'
                         name='confirmPassword'
@@ -55,6 +85,7 @@ class Register extends Component {
                         value={this.state.confirmPassword}
                         onChange={(event) => this.onChangeHandler(event, 'confirmPassword')}
                     />
+                    <button type='submit'>Sign Up!</button>
                 </form>
                 <div>Already a user? <Link to="/login">Log in now</Link></div>
             </>
