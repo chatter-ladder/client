@@ -47,15 +47,13 @@ class Login extends Component {
             <>
                 <form>
                     <Input 
-                        className='placeholder'
                         type='email'
                         name='email'
                         placeholder='Enter email address'
                         value={this.state.controls.email.value}
                         onChange={(event) => this.onChangeHandler(event, 'email')}
                     />
-                                    <Input 
-                        className='placeholder'
+                    <Input 
                         type='password'
                         name='password'
                         placeholder='Enter password'

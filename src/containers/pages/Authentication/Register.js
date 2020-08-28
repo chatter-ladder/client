@@ -119,6 +119,7 @@ class Register extends Component {
             <>
                 <form onSubmit={this.submitHandler}>
                     <Input 
+                        type='text'
                         name='username'
                         placeholder='Enter a username'
                         value={this.state.username}
@@ -126,6 +127,7 @@ class Register extends Component {
                         invalid={!this.state.controls.username.valid && this.state.controls.username.touched}
                     />
                     <Input 
+                        type='email'
                         name='email'
                         placeholder='Enter email address'
                         value={this.state.email}
@@ -133,6 +135,7 @@ class Register extends Component {
                         invalid={!this.state.controls.email.valid && this.state.controls.email.touched}
                     />
                     <Input 
+                        type='password'
                         name='password'
                         placeholder='Enter password'
                         value={this.state.password}
@@ -140,6 +143,7 @@ class Register extends Component {
                         invalid={!this.state.controls.password.valid && this.state.controls.password.touched}
                     />
                     <Input 
+                        type='password'
                         name='confirmPassword'
                         placeholder='Confirm password'
                         value={this.state.confirmPassword}

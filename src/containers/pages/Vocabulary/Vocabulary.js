@@ -218,6 +218,7 @@ class Vocabulary extends Component {
         <h1>Vocabulary List</h1>
         <form onSubmit={this.addVocabHandler}>
           <Input 
+            type='text'
             name='word'
             placeholder={"Enter new word"}
             value={this.state.vocabForm.word.value}
@@ -225,6 +226,7 @@ class Vocabulary extends Component {
             invalid={!this.state.vocabForm.word.validation.valid && this.state.vocabForm.word.touched}
           />
           <Input 
+            type='text'
             name='translation'
             placeholder={"Enter translation"}
             value={this.state.vocabForm.translation.value}
