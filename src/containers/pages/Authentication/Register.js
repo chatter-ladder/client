@@ -18,7 +18,8 @@ class Register extends Component {
             email: {
                 value: '',
                 validation: {
-                    required: true
+                    required: true,
+                    isEmail: true
                 },
                 valid: false,
                 touched: false
@@ -26,7 +27,8 @@ class Register extends Component {
             password: {
                 value: '',
                 validation: {
-                    required: true
+                    required: true,
+                    minLength: 6
                 },
                 valid: false,
                 touched: false
@@ -34,12 +36,33 @@ class Register extends Component {
             confirmPassword: {
                 value: '',
                 validation: {
-                    required: true
+                    required: true,
+                    minLength: 6
                 },
                 valid: false,
                 touched: false
             }
         }
+    }
+
+    checkValidity = (value, rules) => {
+        let isValid = true;
+
+        if (!rules) {
+            return true
+        }
+
+        if (rules.required) {
+            isValid = value.trim() !== '' && isValid;
+        }
+
+        // is Email
+
+        // is minLength
+
+        // is maxLength
+
+        return isValid
     }
 
     onChangeHandler = (event, formElement) => {
