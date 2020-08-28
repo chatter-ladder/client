@@ -60,7 +60,7 @@ class Login extends Component {
             [formElement]: {
                 ...this.state.controls[formElement],
                 value: event.target.value,
-                // valid: this.checkValidity(event.target.value, this.state.controls[formElement].validation),
+                valid: this.checkValidity(event.target.value, this.state.controls[formElement].validation),
                 touched: true
             }
         }
