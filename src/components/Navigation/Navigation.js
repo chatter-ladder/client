@@ -11,6 +11,8 @@ const Navigation = () => {
         <li><NavLink activeClassName={classes.active} to='profile'>PROFILE</NavLink></li>
         <li><NavLink activeClassName={classes.active} to='flashcards'>FLASHCARDS</NavLink></li>
         <li><NavLink activeClassName={classes.active} to='vocabulary'>VOCABULARY</NavLink></li>
+        <li><NavLink activeClassName={classes.active} to='login'>LOGIN</NavLink></li>
+        <li><NavLink activeClassName={classes.active} to='register'>SIGNUP</NavLink></li>
       </ul>
     </nav>
   )

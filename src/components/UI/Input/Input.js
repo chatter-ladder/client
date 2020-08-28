@@ -15,7 +15,7 @@ const Input = (props) => {
         <>
             <input
                 className={inputClasses.join(' ')}
-                type='text'
+                type={props.type}
                 name={props.name}
                 placeholder={props.placeholder}
                 value={props.value}
