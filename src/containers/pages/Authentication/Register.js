@@ -56,12 +56,18 @@ class Register extends Component {
             isValid = value.trim() !== '' && isValid;
         }
 
-        // is Email
+        if (rules.isEmail) {
+            const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            isValid = emailRegex.test(value.toLowerCase());
+        }
 
-        // is minLength
+        if (rules.minLength) {
+            isValid = value.length >= rules.minLength && isValid;
+        }
 
-        // is maxLength
-
+        if (rules.maxLength) {
+            isValid = value.length <= rules.maxLength && isValid;
+        }
         return isValid
     }
 
