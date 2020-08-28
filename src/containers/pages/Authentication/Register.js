@@ -66,9 +66,18 @@ class Register extends Component {
     }
 
     onChangeHandler = (event, formElement) => {
+        const updatedControls = {
+            ...this.state.controls,
+            [formElement]: {
+                ...this.state.controls[formElement],
+                value: event.target.value,
+                valid: this.checkValidity(event.target.value, this.state.controls[formElement].validation),
+                touched: true
+            }
+        }
+        
         this.setState({ 
-            ...this.state,
-            [formElement]: event.target.value 
+            controls: updatedControls 
         })
     }
 
