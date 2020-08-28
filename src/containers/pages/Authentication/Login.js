@@ -3,31 +3,42 @@ import { Link } from 'react-router-dom';
 
 import Input from '../../../components/UI/Input/Input';
 
-class Register extends Component {
+class Login extends Component {
 
     state = {
-        email: {
-            value: '',
-            validation: {
-                required: true
+        controls: {
+            email: {
+                value: '',
+                validation: {
+                    required: true
+                },
+                valid: false,
+                touched: false
             },
-            valid: false,
-            touched: false
-        },
-        password: {
-            value: '',
-            validation: {
-                required: true
-            },
-            valid: false,
-            touched: false
-        },
+            password: {
+                value: '',
+                validation: {
+                    required: true
+                },
+                valid: false,
+                touched: false
+            }
+        }
     }
 
     onChangeHandler = (event, formElement) => {
+        const updatedControls = {
+            ...this.state.controls,
+            [formElement]: {
+                ...this.state.controls[formElement],
+                value: event.target.value,
+                // valid: this.checkValidity(event.target.value, this.state.controls[formElement].validation),
+                touched: true
+            }
+        }
+        
         this.setState({ 
-            ...this.state,
-            [formElement]: event.target.value 
+            controls: updatedControls 
         })
     }
 
@@ -40,7 +51,7 @@ class Register extends Component {
                         type='email'
                         name='email'
                         placeholder='Enter email address'
-                        value={this.state.email}
+                        value={this.state.controls.email.value}
                         onChange={(event) => this.onChangeHandler(event, 'email')}
                     />
                                     <Input 
@@ -48,7 +59,7 @@ class Register extends Component {
                         type='password'
                         name='password'
                         placeholder='Enter password'
-                        value={this.state.password}
+                        value={this.state.controls.password.value}
                         onChange={(event) => this.onChangeHandler(event, 'password')}
                     />
                     <button type='submit'>Log In</button>
@@ -60,4 +71,4 @@ class Register extends Component {
     }
 };
 
-export default Register;
+export default Login;
