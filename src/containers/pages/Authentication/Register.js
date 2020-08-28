@@ -87,10 +87,37 @@ class Register extends Component {
         })
     }
 
+    submitHandler = (event) => {
+        event.preventDefault();
+
+        const usersDetails = {
+            username: this.state.controls.username.value,
+            email: this.state.controls.email.value,
+            password: this.state.controls.password.value,
+            confirmPassword: this.state.controls.confirmPassword.value
+          }
+      
+          fetch('http://localhost:3001/users/register', {
+            method: 'POST',
+            headers: {'Content-Type':'application/json', 'Accept': 'application/json'},
+            body:JSON.stringify(usersDetails)
+          })
+          .then(response => {
+            console.log(response)
+            if (response.ok) {
+              return(response.json())
+            }
+            throw new Error("Network response wasn't ok")
+          })
+          .then(data => {
+            console.log(data)
+          })
+    }
+
     render () {
         return (
             <>
-                <form>
+                <form onSubmit={this.submitHandler}>
                     <Input 
                         name='username'
                         placeholder='Enter a username'
