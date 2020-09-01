@@ -61,6 +61,11 @@ export const authLogin = (usersDetails) => {
         })
         .then(data => {
             console.log(data)
+            dispatch(authSuccess(data))
+        })
+        .catch(error => {
+            console.log(error)
+            dispatch(authFail())
         })
     }
 }

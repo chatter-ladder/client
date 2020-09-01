@@ -82,7 +82,7 @@ class Login extends Component {
 
         this.props.onAuth(
             usersDetails,
-            true
+            false
         )
     }
 
