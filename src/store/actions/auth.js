@@ -6,10 +6,11 @@ export const authStart = () => {
     };
 };
 
-export const authSuccess = (authData) => {
+export const authSuccess = (token, userId) => {
     return {
         type: actionTypes.AUTH_SUCCESS,
-        authData: authData
+        accessToken: token,
+        userId: userId
     };
 };
 
@@ -28,7 +29,7 @@ export const authRegister = (usersDetails) => {
             body:JSON.stringify(usersDetails)
         })
         .then(response => {
-            console.log(response)
+            // console.log(response)
             if (response.ok) {
                 return(response.json())
             }
@@ -36,7 +37,7 @@ export const authRegister = (usersDetails) => {
         })
         .then(data => {
             console.log(data)
-            dispatch(authSuccess(data))
+            dispatch(authSuccess(data.accessToken, data.userId))
         })
         .catch(error => {
             console.log(error)
@@ -53,7 +54,7 @@ export const authLogin = (usersDetails) => {
             body:JSON.stringify(usersDetails)
         })
         .then(response => {
-            console.log(response)
+            // console.log(response)
             if (response.ok) {
               return(response.json())
             }
@@ -61,7 +62,7 @@ export const authLogin = (usersDetails) => {
         })
         .then(data => {
             console.log(data)
-            dispatch(authSuccess(data))
+            dispatch(authSuccess(data.accessToken, data.userId))
         })
         .catch(error => {
             console.log(error)
