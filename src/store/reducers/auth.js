@@ -1,4 +1,5 @@
 import * as actionTypes from '../actions/actionTypes';
+import { updateObject } from '../utility';
 
 const initialState = {
     token: null,
@@ -8,7 +9,7 @@ const initialState = {
 };
 
 const authStart = (state, action) => {
-    return { ...state, error: null, loading: true }
+    return updateObject(state, { error: null, loading: true });
 }
 
 const reducer = (state = initialState, action) => {
