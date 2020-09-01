@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import Input from '../../../components/UI/Input/Input';
+import * as actions from '../../../store/actions/index';
 
 class Login extends Component {
 
@@ -83,23 +84,6 @@ class Login extends Component {
             usersDetails,
             true
         )
-        
-      
-        //   fetch('http://localhost:3001/users/login', {
-        //     method: 'POST',
-        //     headers: {'Content-Type':'application/json', 'Accept': 'application/json'},
-        //     body:JSON.stringify(usersDetails)
-        //   })
-        //   .then(response => {
-        //     console.log(response)
-        //     if (response.ok) {
-        //       return(response.json())
-        //     }
-        //     throw new Error("Network response wasn't ok")
-        //   })
-        //   .then(data => {
-        //     console.log(data)
-        //   })
     }
 
     render () {
