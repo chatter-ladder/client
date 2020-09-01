@@ -92,14 +92,19 @@ class Register extends Component {
     submitHandler = (event) => {
         event.preventDefault();
 
-        
+        const usersDetails = {
+            username: this.state.controls.username.value,
+            email: this.state.controls.email.value,
+            password: this.state.controls.password.value,
+            confirmPassword: this.state.controls.confirmPassword.value
+          }
 
-        // const usersDetails = {
-        //     username: this.state.controls.username.value,
-        //     email: this.state.controls.email.value,
-        //     password: this.state.controls.password.value,
-        //     confirmPassword: this.state.controls.confirmPassword.value
-        //   }
+        this.props.onAuth(
+            usersDetails,
+            true
+        )
+
+
       
         //   fetch('http://localhost:3001/users/register', {
         //     method: 'POST',
@@ -164,7 +169,7 @@ class Register extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAuth: (email, password) => dispatch(actions.auth(email, password))
+        onAuth: (name, email, password, confirmPassword, isRegistering) => dispatch(actions.auth(name, email, password, confirmPassword, isRegistering))
     }
 }
 

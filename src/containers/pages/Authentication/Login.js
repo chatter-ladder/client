@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import Input from '../../../components/UI/Input/Input';
 
@@ -72,27 +73,33 @@ class Login extends Component {
 
     submitHandler = (event) => {
         event.preventDefault();
-
+        
         const usersDetails = {
             email: this.state.controls.email.value,
             password: this.state.controls.password.value
           }
+
+        this.props.onAuth(
+            usersDetails,
+            true
+        )
+        
       
-          fetch('http://localhost:3001/users/login', {
-            method: 'POST',
-            headers: {'Content-Type':'application/json', 'Accept': 'application/json'},
-            body:JSON.stringify(usersDetails)
-          })
-          .then(response => {
-            console.log(response)
-            if (response.ok) {
-              return(response.json())
-            }
-            throw new Error("Network response wasn't ok")
-          })
-          .then(data => {
-            console.log(data)
-          })
+        //   fetch('http://localhost:3001/users/login', {
+        //     method: 'POST',
+        //     headers: {'Content-Type':'application/json', 'Accept': 'application/json'},
+        //     body:JSON.stringify(usersDetails)
+        //   })
+        //   .then(response => {
+        //     console.log(response)
+        //     if (response.ok) {
+        //       return(response.json())
+        //     }
+        //     throw new Error("Network response wasn't ok")
+        //   })
+        //   .then(data => {
+        //     console.log(data)
+        //   })
     }
 
     render () {
@@ -124,4 +131,11 @@ class Login extends Component {
     }
 };
 
-export default Login;
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onAuth: (usersDetails, isRegistering) => dispatch(actions.auth(usersDetails, isRegistering))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(Login);

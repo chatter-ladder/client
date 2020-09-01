@@ -20,9 +20,28 @@ export const authFail = (error) => {
     };
 };
 
-export const auth = (email, password) => {
+export const authRegister = (userDetails) => {
     return dispatch => {
+        
+    }
+}
+
+export const authLogin = (userDetails) => {
+    return dispatch => {
+
+    }
+}
+
+
+export const auth = (userDetails, isRegistering) => {
+    return dispatch => {
+
+        if (isRegistering) {
+
+        } else {
+
+        }
         // will authenticate user here
-        dispatch(authStart());
+        // dispatch(authStart());
     };
 };
