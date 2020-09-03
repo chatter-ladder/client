@@ -30,35 +30,23 @@ export const authRegister = (userDetails) => {
                 dispatch(authSuccess(response.data.accessToken, response.data.userId))
             })
             .catch(error => {
-                console.log(error.response.data.errors)
-                dispatch(authFail(error.response.data.errors))
+                console.log(error.response)
+                dispatch(authFail(error.response.data.error))
             })
     }
 }
 
-export const authLogin = (usersDetails) => {
+export const authLogin = (userDetails) => {
     return dispatch => {
-        fetch('http://localhost:3001/users/login', {
-            method: 'POST',
-            headers: {'Content-Type':'application/json', 'Accept': 'application/json'},
-            body:JSON.stringify(usersDetails)
-        })
-        .then(response => {
-            console.log(response)
-            if (response.ok) {
-                return(response.json())
-            }
-                throw new Error({ message: "Network response wasn't ok" })
-        })
-        .then(data => {
-            console.log(data)
-            dispatch(authSuccess(data.accessToken, data.userId))
-        })
-        .catch(error => {
-            console.log(error)
-            console.log(error.response)
-            dispatch(authFail(error))
-        })
+        axios.post('users/login', userDetails)
+            .then(response => {
+                console.log(response)
+                dispatch(authSuccess(response.data.accessToken, response.data.userId))
+            })
+            .catch(error => {
+                console.log(error.response)
+                dispatch(authFail(error.response.data.error))
+            })
     }
 }
 
