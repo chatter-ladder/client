@@ -22,43 +22,22 @@ export const authFail = (error) => {
     };
 };
 
-export const authRegister = (userDetails) => {
-    return dispatch => {
-        axios.post('/users/register', userDetails)
-            .then(response => {
-                console.log(response)
-                dispatch(authSuccess(response.data.accessToken, response.data.userId))
-            })
-            .catch(error => {
-                console.log(error.response)
-                dispatch(authFail(error.response.data.error))
-            })
-    }
-}
-
-export const authLogin = (userDetails) => {
-    return dispatch => {
-        axios.post('users/login', userDetails)
-            .then(response => {
-                console.log(response)
-                dispatch(authSuccess(response.data.accessToken, response.data.userId))
-            })
-            .catch(error => {
-                console.log(error.response)
-                dispatch(authFail(error.response.data.error))
-            })
-    }
-}
-
-
 export const auth = (userDetails, isRegistering) => {
     return dispatch => {
         dispatch(authStart());
 
+        let url = 'users/login';
         if (isRegistering) {
-            dispatch(authRegister(userDetails))
-        } else {
-            dispatch(authLogin(userDetails))
+            url = '/users/register';
         }
+        axios.post(url, userDetails)
+        .then(response => {
+            console.log(response)
+            dispatch(authSuccess(response.data.accessToken, response.data.userId))
+        })
+        .catch(error => {
+            console.log(error.response)
+            dispatch(authFail(error.response.data.error))
+        })
     };
 };
