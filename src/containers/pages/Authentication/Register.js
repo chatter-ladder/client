@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import Input from '../../../components/UI/Input/Input';
+import * as actions from '../../../store/actions/index';
 
 class Register extends Component {
 
@@ -96,22 +98,11 @@ class Register extends Component {
             password: this.state.controls.password.value,
             confirmPassword: this.state.controls.confirmPassword.value
           }
-      
-          fetch('http://localhost:3001/users/register', {
-            method: 'POST',
-            headers: {'Content-Type':'application/json', 'Accept': 'application/json'},
-            body:JSON.stringify(usersDetails)
-          })
-          .then(response => {
-            console.log(response)
-            if (response.ok) {
-              return(response.json())
-            }
-            throw new Error("Network response wasn't ok")
-          })
-          .then(data => {
-            console.log(data)
-          })
+
+        this.props.onAuth(
+            usersDetails,
+            true
+        )
     }
 
     render () {
@@ -158,4 +149,10 @@ class Register extends Component {
     }
 };
 
-export default Register;
+const mapDispatchToProps = dispatch => {
+    return {
+        onAuth: (name, email, password, confirmPassword, isRegistering) => dispatch(actions.auth(name, email, password, confirmPassword, isRegistering))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(Register);
