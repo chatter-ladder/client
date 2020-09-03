@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
+import axios from 'axios';
 
 import './index.css';
 import App from './containers/App';
@@ -11,6 +12,8 @@ import * as serviceWorker from './serviceWorker';
 import authReducer from './store/reducers/auth';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+axios.defaults.baseURL = 'http://localhost:3001'
 
 // const rootReducer = combineReducers({
 //   auth: authReducer

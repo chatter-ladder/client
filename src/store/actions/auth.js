@@ -41,7 +41,7 @@ export const authRegister = (usersDetails) => {
         })
         .catch(error => {
             console.log(error)
-            dispatch(authFail())
+            dispatch(authFail(error.response))
         })
     }
 }
@@ -54,11 +54,11 @@ export const authLogin = (usersDetails) => {
             body:JSON.stringify(usersDetails)
         })
         .then(response => {
-            // console.log(response)
+            console.log(response)
             if (response.ok) {
-              return(response.json())
+                return(response.json())
             }
-            throw new Error("Network response wasn't ok")
+                throw new Error({ message: "Network response wasn't ok" })
         })
         .then(data => {
             console.log(data)
@@ -66,7 +66,8 @@ export const authLogin = (usersDetails) => {
         })
         .catch(error => {
             console.log(error)
-            dispatch(authFail())
+            console.log(error.response)
+            dispatch(authFail(error))
         })
     }
 }
