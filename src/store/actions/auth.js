@@ -1,4 +1,5 @@
 import * as actionTypes from './actionTypes';
+import axios from 'axios';
 
 export const authStart = () => {
     return {
@@ -21,28 +22,17 @@ export const authFail = (error) => {
     };
 };
 
-export const authRegister = (usersDetails) => {
+export const authRegister = (userDetails) => {
     return dispatch => {
-        fetch('http://localhost:3001/users/register', {
-            method: 'POST',
-            headers: {'Content-Type':'application/json', 'Accept': 'application/json'},
-            body:JSON.stringify(usersDetails)
-        })
-        .then(response => {
-            // console.log(response)
-            if (response.ok) {
-                return(response.json())
-            }
-            throw new Error("Network response wasn't ok")
-        })
-        .then(data => {
-            console.log(data)
-            dispatch(authSuccess(data.accessToken, data.userId))
-        })
-        .catch(error => {
-            console.log(error)
-            dispatch(authFail(error.response))
-        })
+        axios.post('/users/register', userDetails)
+            .then(response => {
+                console.log(response)
+                dispatch(authSuccess(response.data.accessToken, response.data.userId))
+            })
+            .catch(error => {
+                console.log(error.response.data.errors)
+                dispatch(authFail(error.response.data.errors))
+            })
     }
 }
 
