@@ -22,13 +22,19 @@ export const authFail = (error) => {
     };
 };
 
+export const logout = () => {
+    return {
+        type: actionTypes.AUTH_LOGOUT
+    }
+};
+
 export const checkAuthTimeout = (expirationTime) => {
     return dispatch => {
         setTimeout(() => {
-
+            dispatch(logout())
         }, expirationTime)
-    }
-}
+    };
+};
 
 export const auth = (userDetails, isRegistering) => {
     return dispatch => {
