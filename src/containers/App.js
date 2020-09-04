@@ -10,10 +10,15 @@ import Vocabulary from "./pages/Vocabulary/Vocabulary";
 import Login from "./pages/Authentication/Login";
 import Register from "./pages/Authentication/Register";
 import Logout from "./pages/Authentication/Logout";
+import * as actions from "../store/actions/index";
 
 // import './App.css';
 
 class App extends Component {
+  componentDidMount() {
+    this.props.onTryAutoSignup();
+  }
+
   render() {
     return (
       <>
@@ -36,4 +41,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onTryAutoSignup: () => dispatch(actions.authCheckState()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
