@@ -47,6 +47,7 @@ class Vocabulary extends Component {
   };
 
   componentDidMount() {
+    console.log("Component mounted");
     axios
       .get("/vocabulary", {
         headers: {
