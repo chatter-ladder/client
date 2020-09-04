@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 
 import Navigation from "../components/Navigation/Navigation";
@@ -20,16 +20,30 @@ class App extends Component {
   }
 
   render() {
+    let routes = (
+      <Switch>
+        <Route path="/login" component={Login} />
+        <Route path="/register" component={Register} />
+        <Route path="/" exact component={Home} />
+      </Switch>
+    );
+
+    if (this.props.isAuthencated) {
+      routes = (
+        <Switch>
+          <Route path="/profile" component={Profile} />
+          <Route path="/flashcards" component={Flashcards} />
+          <Route path="/vocabulary" component={Vocabulary} />
+          <Route path="/logout" component={Logout} />
+          <Route path="/" exact component={Home} />
+        </Switch>
+      );
+    }
+
     return (
       <>
         <Navigation isAuthenticated={this.props.isAuthencated} />
-        <Route path="/" exact component={Home} />
-        <Route path="/profile" component={Profile} />
-        <Route path="/flashcards" component={Flashcards} />
-        <Route path="/vocabulary" component={Vocabulary} />
-        <Route path="/login" component={Login} />
-        <Route path="/register" component={Register} />
-        <Route path="/logout" component={Logout} />
+        {routes}
       </>
     );
   }
