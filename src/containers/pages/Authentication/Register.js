@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
 import Input from "../../../components/UI/Input/Input";
@@ -105,8 +105,14 @@ class Register extends Component {
   };
 
   render() {
+    let authRedirect = null;
+    if (this.props.isAuthenticated) {
+      authRedirect = <Redirect to="/profile" />;
+    }
+
     return (
       <>
+        {authRedirect}
         <form onSubmit={this.submitHandler}>
           <Input
             type="text"
