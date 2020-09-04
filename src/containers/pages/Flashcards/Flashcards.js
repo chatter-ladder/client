@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import axios from "axios";
 
 import Flashcard from "../../../components/Flashcard/Flashcard";
@@ -68,28 +69,18 @@ class Flashcards extends Component {
 
   startFlashcardsHandler = () => {
     const flashcardRequirements = {
-      user_id: 1,
       number: this.state.numFlashcards,
     };
 
-    fetch("http://localhost:3001/flashcards", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify(flashcardRequirements),
-    })
-      .then((response) => {
-        console.log(response);
-        if (response.ok) {
-          return response.json();
-        }
-        throw new Error("Network response wasn't ok");
+    axios
+      .post("/flashcards", flashcardRequirements, {
+        headers: {
+          Authorization: `Bearer ${this.props.accessToken}`,
+        },
       })
-      .then((data) => {
+      .then((response) => {
         let vocabData = [];
-        data.map((vocab) => {
+        response.data.map((vocab) => {
           let updatedVocab = {
             ...vocab,
             seen: false,
@@ -104,7 +95,42 @@ class Flashcards extends Component {
           showFlashcards: true,
           progress: updatedProgress,
         });
-      });
+      })
+      .catch((error) => console.log(error));
+
+    // fetch("http://localhost:3001/flashcards", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     Accept: "application/json",
+    //   },
+    //   body: JSON.stringify(flashcardRequirements),
+    // })
+    //   .then((response) => {
+    //     console.log(response);
+    //     if (response.ok) {
+    //       return response.json();
+    //     }
+    //     throw new Error("Network response wasn't ok");
+    //   })
+    //   .then((data) => {
+    //     let vocabData = [];
+    //     data.map((vocab) => {
+    //       let updatedVocab = {
+    //         ...vocab,
+    //         seen: false,
+    //         correct: false,
+    //         incorrect: false,
+    //       };
+    //       return vocabData.push(updatedVocab);
+    //     });
+    //     const updatedProgress = this.updateProgress(vocabData);
+    //     this.setState({
+    //       flashcardsVocab: vocabData,
+    //       showFlashcards: true,
+    //       progress: updatedProgress,
+    //     });
+    //   });
   };
   updateProgress = (vocabList) => {
     let updatedProgress = {
@@ -230,7 +256,7 @@ class Flashcards extends Component {
     return (
       <>
         <h1>Flashcards page</h1>
-        {this.state.countVocabList > 5 &&
+        {this.state.countVocabList >= 5 &&
         !this.state.showFlashcards &&
         !this.state.showSummary ? (
           <>
@@ -293,4 +319,10 @@ class Flashcards extends Component {
   }
 }
 
-export default Flashcards;
+const mapStateToProps = (state) => {
+  return {
+    accessToken: state.token,
+  };
+};
+
+export default connect(mapStateToProps)(Flashcards);
