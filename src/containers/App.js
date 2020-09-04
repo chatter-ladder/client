@@ -9,6 +9,7 @@ import Flashcards from "./pages/Flashcards/Flashcards";
 import Vocabulary from "./pages/Vocabulary/Vocabulary";
 import Login from "./pages/Authentication/Login";
 import Register from "./pages/Authentication/Register";
+import Logout from "./pages/Authentication/Logout";
 
 // import './App.css';
 
@@ -23,6 +24,7 @@ class App extends Component {
         <Route path="/vocabulary" component={Vocabulary} />
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
+        <Route path="/logout" component={Logout} />
       </>
     );
   }
