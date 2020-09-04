@@ -90,9 +90,17 @@ class Login extends Component {
     if (this.props.isAuthenticated) {
       authRedirect = <Redirect to="/profile" />;
     }
+
+    let errorMessage = null;
+
+    if (this.props.error) {
+      errorMessage = <p>{this.props.error}</p>;
+    }
+
     return (
       <>
         {authRedirect}
+        {errorMessage}
         <form onSubmit={this.submitHandler}>
           <Input
             type="email"
