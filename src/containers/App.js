@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
 import Navigation from "../components/Navigation/Navigation";
@@ -25,6 +25,7 @@ class App extends Component {
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
         <Route path="/" exact component={Home} />
+        <Redirect to="/" />
       </Switch>
     );
 
@@ -36,6 +37,7 @@ class App extends Component {
           <Route path="/vocabulary" component={Vocabulary} />
           <Route path="/logout" component={Logout} />
           <Route path="/" exact component={Home} />
+          <Redirect to="/" />
         </Switch>
       );
     }
