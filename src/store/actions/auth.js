@@ -23,8 +23,11 @@ export const authFail = (error) => {
 };
 
 export const logout = () => {
+  // Need to also send refreshToken to server to remove from db
   localStorage.removeItem("accessToken");
   localStorage.removeItem("expirationDate");
+  localStorage.removeItem("refreshToken");
+  localStorage.removeItem("userId");
   return {
     type: actionTypes.AUTH_LOGOUT,
   };
@@ -55,6 +58,8 @@ export const auth = (userDetails, isRegistering) => {
         );
         localStorage.setItem("accessToken", response.data.accessToken);
         localStorage.setItem("expirationDate", expirationDate);
+        localStorage.setItem("refreshToken", response.data.refreshToken);
+        localStorage.setItem("userId", response.data.userId);
         dispatch(authSuccess(response.data.accessToken, response.data.userId));
         dispatch(checkAuthTimeout(response.data.expiresIn));
       })
@@ -62,5 +67,21 @@ export const auth = (userDetails, isRegistering) => {
         console.log(error.response);
         dispatch(authFail(error.response.data.error));
       });
+  };
+};
+
+export const authCheckState = () => {
+  return (dispatch) => {
+    const accessToken = localStorage.getItem("accessToken");
+    if (!accessToken) {
+      dispatch(logout());
+    } else {
+      const expirationDate = new Date(localStorage.getItem("expirationDate"));
+      if (expirationDate < new Date()) {
+        dispatch(logout());
+      } else {
+        dispatch(authSuccess(accessToken));
+      }
+    }
   };
 };
