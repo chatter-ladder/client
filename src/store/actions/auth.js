@@ -22,14 +22,31 @@ export const authFail = (error) => {
   };
 };
 
-export const logout = () => {
-  // Need to also send refreshToken to server to remove from db
-  localStorage.removeItem("accessToken");
-  localStorage.removeItem("expirationDate");
-  localStorage.removeItem("refreshToken");
-  localStorage.removeItem("userId");
+export const logoutComplete = () => {
   return {
     type: actionTypes.AUTH_LOGOUT,
+  };
+};
+
+export const logout = () => {
+  return (dispatch) => {
+    // Need to also send refreshToken to server to remove from db
+    const refreshToken = {
+      token: localStorage.getItem("refreshToken"),
+    };
+    console.log(refreshToken);
+    axios
+      .delete("/users/logout", {
+        params: refreshToken,
+      })
+      .then((response) => {
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("expirationDate");
+        localStorage.removeItem("refreshToken");
+        localStorage.removeItem("userId");
+        dispatch(logoutComplete());
+      })
+      .catch((error) => console.log(error));
   };
 };
 
