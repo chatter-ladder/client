@@ -87,29 +87,19 @@ class Vocabulary extends Component {
     // need to check if word is unique in users vocab list before submitting
 
     const vocabData = {
-      user_id: 1,
       word: this.state.vocabForm.word.value,
       word_language: "spanish",
       translation: this.state.vocabForm.translation.value,
       translation_language: "english",
     };
 
-    fetch("http://localhost:3001/vocabulary", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify(vocabData),
-    })
-      .then((response) => {
-        console.log(response);
-        if (response.ok) {
-          return response.text();
-        }
-        throw new Error("Network response wasn't ok");
+    axios
+      .post("/vocabulary", vocabData, {
+        headers: {
+          Authorization: `Bearer ${this.props.accessToken}`,
+        },
       })
-      .then((text) => {
+      .then((response) => {
         let updatedForm = {
           ...this.state.vocabForm,
         };
@@ -123,12 +113,9 @@ class Vocabulary extends Component {
         };
         updatedForm.word = updatedFormWord;
         updatedForm.translation = updatedFormTranslation;
-
-        console.log(updatedForm);
-
         this.setState({ vocabForm: updatedForm });
-        // console.log(text)
-      });
+      })
+      .catch((error) => console.log(error));
   };
 
   inputChangedHandler = (event, inputIdentifier) => {
