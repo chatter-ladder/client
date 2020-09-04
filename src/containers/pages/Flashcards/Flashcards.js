@@ -219,25 +219,36 @@ class Flashcards extends Component {
   };
 
   flashcardFinishHandler = () => {
-    fetch("http://localhost:3001/flashcards/completed", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify(this.state.flashcardsVocab),
-    })
-      .then((response) => {
-        console.log(response);
-        if (response.ok) {
-          return response.text();
-        }
-        throw new Error("Network response wasn't ok");
+    axios
+      .post("/flashcards/completed", this.state.flashcardsVocab, {
+        headers: {
+          Authorization: `Bearer ${this.props.accessToken}`,
+        },
       })
-      .then((text) => {
-        console.log(text);
-      });
-    this.setState({ showSummary: true, showFlashcards: false });
+      .then((response) => {
+        console.log(response.data);
+        this.setState({ showSummary: true, showFlashcards: false });
+      })
+      .catch((error) => console.log(error));
+    // fetch("http://localhost:3001/flashcards/completed", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     Accept: "application/json",
+    //   },
+    //   body: JSON.stringify(this.state.flashcardsVocab),
+    // })
+    //   .then((response) => {
+    //     console.log(response);
+    //     if (response.ok) {
+    //       return response.text();
+    //     }
+    //     throw new Error("Network response wasn't ok");
+    //   })
+    //   .then((text) => {
+    //     console.log(text);
+    //   });
+    // this.setState({ showSummary: true, showFlashcards: false });
   };
 
   startAgainHandler = () => {
