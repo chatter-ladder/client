@@ -20,3 +20,4 @@ test("renders learn react link", () => {
   const linkElement = getByText(/Home page/i);
   expect(linkElement).toBeInTheDocument();
 });
+
